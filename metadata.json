@@ -1,0 +1,6 @@
+{
+  "name": "SITR — Guard Your Gaze",
+  "description": "Islamic Digital Wellbeing & Distraction Blocker companion app powered by nafs discipline, taqwa streaks, and dhikr redirection.",
+  "requestFramePermissions": ["notifications"],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
