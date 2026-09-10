@@ -40,6 +40,7 @@ import { PrayerStatusBadge } from '../components/PrayerStatusBadge';
 import { dhikrAmbientAudio } from '../utils/ambientAudioEngine';
 import { DHIKR_OPTIONS } from '../data/dhikr';
 import { RuleType, ExtendedView, DhikrType } from '../types';
+import { DailyReflectionCard } from '../components/DailyReflectionCard';
 
 interface HomeDashboardProps {
   onNavigate?: (view: ExtendedView) => void;
@@ -466,6 +467,9 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
           Rescue Me
         </span>
       </button>
+
+      {/* 2.5 DAILY REFLECTION & EVENING MUHASABAH CARD */}
+      <DailyReflectionCard onNavigate={onNavigate} />
 
       {/* 3. INTERACTIVE DHIKR INTERRUPT CARD WITH PROGRESS ANIMATIONS */}
       <div className="rounded-3xl bg-gradient-to-b from-[#1C1033] via-[#150B27] to-[#0E061B] border border-purple-800/40 p-5 sm:p-6 shadow-xl relative overflow-hidden">

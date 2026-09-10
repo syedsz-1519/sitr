@@ -1,7 +1,20 @@
 import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
-import { BlockRule, BlockEvent, DhikrType, PrayerTimes, SmartAlert, RuleType } from '../types';
+import {
+  BlockRule,
+  BlockEvent,
+  DhikrType,
+  PrayerTimes,
+  SmartAlert,
+  RuleType,
+  UserProfile,
+  DailyReflectionEntry,
+  DailyReminderConfig,
+  TaqwaReminderItem,
+} from '../types';
 import confetti from 'canvas-confetti';
+import { dhikrAmbientAudio } from '../utils/ambientAudioEngine';
+import { getDailyScheduledReminder } from '../data/taqwaReminders';
 
 interface SitrState {
   // Mode statuses
@@ -31,6 +44,7 @@ interface SitrState {
   // Profile & Accountability
   userName: string;
   partnerName: string;
+  userProfile: UserProfile;
 
   // Prayer times
   prayerTimes: PrayerTimes;
@@ -44,6 +58,16 @@ interface SitrState {
   lastInterventionReason?: string;
   technicalNoteOpen: boolean;
   menuDrawerOpen: boolean;
+  authModalOpen: boolean;
+
+  // Daily Reflection & Evening Muhasabah
+  dailyReflections: DailyReflectionEntry[];
+  dailyReflectionModalOpen: boolean;
+
+  // Daily Taqwa & Quranic Reminder Scheduler
+  dailyReminderConfig: DailyReminderConfig;
+  activeTaqwaReminder: TaqwaReminderItem | null;
+  reminderSchedulerModalOpen: boolean;
 
   // Actions
   toggleArmed: () => void;
@@ -66,8 +90,27 @@ interface SitrState {
   
   sealNiyyah: () => void;
   recordCleanDay: () => void;
+  setStreakDays: (days: number) => void;
   setPartnerName: (name: string) => void;
   setUserName: (name: string) => void;
+
+  // Auth actions
+  login: (email: string, name?: string) => void;
+  signup: (email: string, name: string) => void;
+  logout: () => void;
+  setAuthModalOpen: (open: boolean) => void;
+
+  // Daily Reflection Actions
+  saveDailyReflection: (entry: Omit<DailyReflectionEntry, 'id' | 'timestamp'>) => void;
+  deleteDailyReflection: (id: string) => void;
+  setDailyReflectionModalOpen: (open: boolean) => void;
+  getTodayReflection: () => DailyReflectionEntry | undefined;
+
+  // Daily Taqwa Reminder Scheduler Actions
+  updateDailyReminderConfig: (config: Partial<DailyReminderConfig>) => void;
+  setReminderSchedulerModalOpen: (open: boolean) => void;
+  triggerScheduledReminder: (customReminder?: TaqwaReminderItem) => void;
+  dismissTaqwaReminder: () => void;
 
   toggleAlert: (id: string) => void;
   fetchPrayerTimes: () => Promise<void>;
@@ -87,6 +130,46 @@ interface SitrState {
 }
 
 // Generate realistic seeded blocks so Heatmap shows 9am & 2pm peaks as seen in design
+const getInitialReflections = (): DailyReflectionEntry[] => {
+  const now = new Date();
+  const getOffsetDate = (daysAgo: number) => {
+    const d = new Date(now);
+    d.setDate(d.getDate() - daysAgo);
+    return d.toISOString().split('T')[0];
+  };
+
+  return [
+    {
+      id: 'ref-seed-1',
+      date: getOffsetDate(1),
+      timestamp: new Date(Date.now() - 86400000).toISOString(),
+      promptId: 'ref-1',
+      quoteText: 'Hold yourselves accountable before you are held accountable, and weigh your deeds before they are weighed for you.',
+      quoteSource: 'Sayyiduna Umar ibn al-Khattab (RA) • Kitab az-Zuhd',
+      quoteArabic: 'حَاسِبُوا أَنْفُسَكُمْ قَبْلَ أَنْ تُحَاسَبُوا، وَزِنُوا أَنْفُسَكُمْ قَبْلَ أَنْ تُوزَنُوا',
+      promptQuestion: 'As this day closes, how did you guard your eyes, heart, and thoughts when you were alone?',
+      journalText: 'Alhamdulillah, resisted opening short-form video reels around 10 PM. Put the phone on airplane mode on the desk and read Surat Al-Mulk instead. Felt a distinct stillness in my chest.',
+      spiritualState: 'guarded',
+      gratitudeNote: 'Grateful for the ability to pray Isha with congregation and for Bilal’s reminder message.',
+      cleanDayLogged: true,
+    },
+    {
+      id: 'ref-seed-2',
+      date: getOffsetDate(2),
+      timestamp: new Date(Date.now() - 172800000).toISOString(),
+      promptId: 'ref-6',
+      quoteText: 'Unquestionably, by the remembrance of Allah do hearts find rest.',
+      quoteSource: 'Surah Ar-Ra’d • 13:28',
+      quoteArabic: 'أَلاَ بِذِكْرِ اللَّهِ تَطْمَئِنُّ الْقُلُوبُ',
+      promptQuestion: 'Which prayer or moment of Dhikr brought your soul genuine stillness and peace today?',
+      journalText: 'Fajr prayer was heavy with gratitude. Did 99 counts of SubhanAllah wa bihamdihi on the SITR counter on my morning commute instead of mindless browsing.',
+      spiritualState: 'peaceful',
+      gratitudeNote: 'Peace of mind and waking up on time for Tahajjud.',
+      cleanDayLogged: true,
+    },
+  ];
+};
+
 const getInitialEvents = (): BlockEvent[] => {
   const today = new Date();
   const year = today.getFullYear();
@@ -166,6 +249,14 @@ export const useSitrStore = create<SitrState>()(
 
       userName: 'Shahnawaz (Fixxells)',
       partnerName: 'Brother Bilal',
+      userProfile: {
+        name: 'Shahnawaz (Fixxells)',
+        email: 'syedshahnawaz1519@gmail.com',
+        isLoggedIn: true,
+        accountType: 'founder',
+        memberSince: 'Shawwal 1447',
+        cloudSyncEnabled: true,
+      },
 
       prayerTimes: {
         Fajr: '05:12 AM',
@@ -184,6 +275,21 @@ export const useSitrStore = create<SitrState>()(
       lastInterventionReason: undefined,
       technicalNoteOpen: false,
       menuDrawerOpen: false,
+      authModalOpen: false,
+      dailyReflectionModalOpen: false,
+      dailyReflections: getInitialReflections(),
+
+      // Daily Taqwa & Quranic Reminder Scheduler
+      dailyReminderConfig: {
+        enabled: true,
+        time: '21:30',
+        contentType: 'both',
+        soundEnabled: true,
+        vibrate: true,
+        lastTriggeredDate: undefined,
+      },
+      activeTaqwaReminder: null,
+      reminderSchedulerModalOpen: false,
 
       toggleArmed: () => set((s) => ({ isArmed: !s.isArmed })),
       toggleNightGuard: () => set((s) => ({ nightGuard: !s.nightGuard })),
@@ -330,8 +436,200 @@ export const useSitrStore = create<SitrState>()(
         });
       },
 
+      setStreakDays: (days: number) => {
+        const d = Math.max(0, days);
+        const longest = Math.max(get().longestStreak, d);
+        if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+          try {
+            navigator.vibrate([30, 40]);
+          } catch {
+            // ignore
+          }
+        }
+        confetti({
+          particleCount: 55,
+          spread: 70,
+          origin: { y: 0.55 },
+          colors: ['#A78BFA', '#F59E0B', '#10B981', '#DDD6FE'],
+        });
+        set({
+          currentStreak: d,
+          longestStreak: longest,
+        });
+      },
+
       setPartnerName: (name) => set({ partnerName: name }),
-      setUserName: (name) => set({ userName: name }),
+      setUserName: (name) => set((s) => ({ userName: name, userProfile: { ...s.userProfile, name } })),
+
+      setAuthModalOpen: (open) => set({ authModalOpen: open }),
+
+      login: (email: string, name?: string) => {
+        const finalName = name?.trim() || email.split('@')[0] || 'Brother';
+        set((s) => ({
+          userName: finalName,
+          userProfile: {
+            ...s.userProfile,
+            name: finalName,
+            email: email.trim(),
+            isLoggedIn: true,
+            accountType: 'founder',
+            cloudSyncEnabled: true,
+          },
+          authModalOpen: false,
+        }));
+        confetti({
+          particleCount: 70,
+          spread: 80,
+          origin: { y: 0.6 },
+          colors: ['#A78BFA', '#F59E0B', '#10B981'],
+        });
+      },
+
+      signup: (email: string, name: string) => {
+        const finalName = name.trim() || 'Brother';
+        set((s) => ({
+          userName: finalName,
+          userProfile: {
+            name: finalName,
+            email: email.trim(),
+            isLoggedIn: true,
+            accountType: 'standard',
+            memberSince: 'Dhul Qi‘dah 1447',
+            cloudSyncEnabled: true,
+          },
+          authModalOpen: false,
+        }));
+        confetti({
+          particleCount: 85,
+          spread: 90,
+          origin: { y: 0.5 },
+          colors: ['#10B981', '#F59E0B', '#A78BFA'],
+        });
+      },
+
+      logout: () => {
+        set((s) => ({
+          userName: 'Guest Brother',
+          userProfile: {
+            name: 'Guest Brother',
+            email: '',
+            isLoggedIn: false,
+            accountType: 'guest',
+            cloudSyncEnabled: false,
+          },
+          authModalOpen: false,
+        }));
+      },
+
+      setDailyReflectionModalOpen: (open) => set({ dailyReflectionModalOpen: open }),
+
+      getTodayReflection: () => {
+        const todayStr = new Date().toISOString().split('T')[0];
+        return get().dailyReflections.find((r) => r.date === todayStr);
+      },
+
+      saveDailyReflection: (entryData) => {
+        const existingIndex = get().dailyReflections.findIndex((r) => r.date === entryData.date);
+        const newEntry: DailyReflectionEntry = {
+          ...entryData,
+          id: existingIndex >= 0 ? get().dailyReflections[existingIndex].id : `ref-${Date.now()}`,
+          timestamp: new Date().toISOString(),
+        };
+
+        let updatedReflections: DailyReflectionEntry[];
+        if (existingIndex >= 0) {
+          updatedReflections = [...get().dailyReflections];
+          updatedReflections[existingIndex] = newEntry;
+        } else {
+          updatedReflections = [newEntry, ...get().dailyReflections];
+        }
+
+        // If marked clean day, also reinforce streak
+        if (entryData.cleanDayLogged) {
+          get().recordCleanDay();
+        }
+
+        if (typeof navigator !== 'undefined' && 'vibrate' in navigator) {
+          try {
+            navigator.vibrate([40, 50, 40]);
+          } catch {
+            // ignore
+          }
+        }
+
+        confetti({
+          particleCount: 65,
+          spread: 75,
+          origin: { y: 0.6 },
+          colors: ['#A78BFA', '#F59E0B', '#10B981', '#E0E7FF'],
+        });
+
+        set({
+          dailyReflections: updatedReflections,
+          dailyReflectionModalOpen: false,
+        });
+      },
+
+      deleteDailyReflection: (id) => {
+        set((s) => ({
+          dailyReflections: s.dailyReflections.filter((r) => r.id !== id),
+        }));
+      },
+
+      updateDailyReminderConfig: (config) => {
+        set((s) => ({
+          dailyReminderConfig: {
+            ...s.dailyReminderConfig,
+            ...config,
+          },
+        }));
+      },
+
+      setReminderSchedulerModalOpen: (open) => set({ reminderSchedulerModalOpen: open }),
+
+      triggerScheduledReminder: (customReminder) => {
+        const { dailyReminderConfig } = get();
+        const reminder =
+          customReminder || getDailyScheduledReminder(dailyReminderConfig.contentType);
+
+        if (dailyReminderConfig.soundEnabled) {
+          dhikrAmbientAudio.playNotificationChime();
+        }
+
+        if (
+          dailyReminderConfig.vibrate &&
+          typeof navigator !== 'undefined' &&
+          'vibrate' in navigator
+        ) {
+          try {
+            navigator.vibrate([120, 80, 120]);
+          } catch {}
+        }
+
+        if (
+          typeof window !== 'undefined' &&
+          'Notification' in window &&
+          Notification.permission === 'granted'
+        ) {
+          try {
+            new Notification(`Sitr: ${reminder.title}`, {
+              body: `${reminder.text} — ${reminder.source}`,
+              icon: '/vite.svg',
+            });
+          } catch {}
+        }
+
+        const todayStr = new Date().toISOString().split('T')[0];
+        set({
+          activeTaqwaReminder: reminder,
+          dailyReminderConfig: {
+            ...dailyReminderConfig,
+            lastTriggeredDate: todayStr,
+          },
+        });
+      },
+
+      dismissTaqwaReminder: () => set({ activeTaqwaReminder: null }),
 
       toggleAlert: (id) =>
         set((s) => ({
@@ -429,6 +727,8 @@ export const useSitrStore = create<SitrState>()(
         salahLock: state.salahLock,
         customBlockModeEnabled: state.customBlockModeEnabled,
         customRules: state.customRules,
+        dailyReflections: state.dailyReflections,
+        dailyReminderConfig: state.dailyReminderConfig,
       }),
     }
   )

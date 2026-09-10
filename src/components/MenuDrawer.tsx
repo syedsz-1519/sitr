@@ -19,9 +19,12 @@ import {
   X,
   Sparkles,
   BookOpen,
+  User,
+  PenTool,
 } from 'lucide-react';
 import { useSitrStore } from '../store/useSitrStore';
 import { ExtendedView } from '../types';
+import { SitrLogo } from './SitrLogo';
 
 interface MenuDrawerProps {
   currentView: ExtendedView;
@@ -45,7 +48,12 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
     rules,
     customRules,
     customBlockModeEnabled,
+    userProfile,
+    setAuthModalOpen,
+    getTodayReflection,
   } = useSitrStore();
+
+  const todayReflection = getTodayReflection();
 
   if (!menuDrawerOpen) return null;
 
@@ -73,11 +81,7 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
           {/* Header Brand */}
           <div className="flex items-center justify-between pb-3 border-b border-purple-900/30">
             <div className="flex items-center gap-3">
-              <img
-                src="/sitr-logo.jpg"
-                alt="SITR Royal Shield"
-                className="w-10 h-10 rounded-xl object-cover border border-purple-500/40 shadow-[0_0_15px_rgba(124,58,237,0.3)]"
-              />
+              <SitrLogo size="md" />
               <div>
                 <div className="flex items-baseline gap-1.5">
                   <span className="font-extrabold text-lg tracking-wider text-white">SITR</span>
@@ -95,6 +99,44 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
             >
               <X className="w-4 h-4" />
             </button>
+          </div>
+
+          {/* Account Profile / Log In & Create Account Card (Featuring exact circular icon from user request) */}
+          <div
+            onClick={() => {
+              setMenuDrawerOpen(false);
+              setAuthModalOpen(true);
+            }}
+            className="p-3 rounded-2xl bg-gradient-to-br from-[#20103A] to-[#140A26] border border-purple-600/40 hover:border-purple-400/70 flex items-center justify-between gap-3 cursor-pointer transition-all shadow-[0_4px_16px_rgba(124,58,237,0.2)] group"
+          >
+            <div className="flex items-center gap-3 min-w-0">
+              {/* Exact circular avatar icon from uploaded image */}
+              <div className="relative shrink-0">
+                <div className="w-10 h-10 rounded-full bg-[#DDD6FE] text-[#241344] flex items-center justify-center shadow-[0_0_12px_rgba(221,214,254,0.35)] group-hover:scale-105 transition-transform">
+                  <User className="w-5 h-5 fill-[#241344] text-[#241344]" />
+                </div>
+                {userProfile.isLoggedIn && (
+                  <span className="w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#100C19] absolute bottom-0 right-0"></span>
+                )}
+              </div>
+
+              <div className="min-w-0">
+                <div className="flex items-center gap-1.5">
+                  <span className="text-xs font-bold text-white truncate">
+                    {userProfile.isLoggedIn ? userProfile.name : 'Sign In / Create Account'}
+                  </span>
+                </div>
+                <p className="text-[10px] text-purple-300/80 truncate">
+                  {userProfile.isLoggedIn ? 'Cloud Sync Active • Tap to manage' : 'Tap to log in & sync streak'}
+                </p>
+              </div>
+            </div>
+
+            <div className="shrink-0">
+              <span className="text-[10px] font-metric font-semibold text-purple-200 px-2.5 py-1 rounded-full bg-[#35185D] border border-purple-500/40 group-hover:bg-purple-600 group-hover:text-white transition-colors">
+                {userProfile.isLoggedIn ? 'Account' : 'Log In'}
+              </span>
+            </div>
           </div>
 
           {/* Section: CORE */}
@@ -183,6 +225,29 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
               </div>
               <span className="text-[10px] bg-amber-500/20 text-amber-300 font-bold px-2 py-0.5 rounded-full font-metric">
                 33×
+              </span>
+            </button>
+
+            <button
+              onClick={() => navigateTo('daily_reflection')}
+              className={`w-full flex items-center justify-between px-4 py-2.5 rounded-full transition-all text-sm font-medium ${
+                currentView === 'daily_reflection'
+                  ? 'bg-purple-600 text-white shadow-[0_4px_16px_rgba(124,58,237,0.4)]'
+                  : 'text-purple-200/80 hover:bg-[#1E1433] hover:text-white'
+              }`}
+            >
+              <div className="flex items-center gap-3">
+                <PenTool className="w-4 h-4 text-amber-400" />
+                <span>Daily Reflection</span>
+              </div>
+              <span
+                className={`text-[10px] px-2 py-0.5 rounded-full font-metric font-semibold ${
+                  todayReflection
+                    ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
+                    : 'bg-amber-500/20 text-amber-300 border border-amber-500/40'
+                }`}
+              >
+                {todayReflection ? 'Done' : 'Tonight'}
               </span>
             </button>
 

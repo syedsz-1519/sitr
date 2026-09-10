@@ -16,6 +16,7 @@ import {
 import confetti from 'canvas-confetti';
 import { useSitrStore } from '../store/useSitrStore';
 import { MILESTONES } from '../data/ayahs';
+import { TaqwaProgressionPattern } from '../components/TaqwaProgressionPattern';
 
 export const TaqwaStreakView: React.FC = () => {
   const {
@@ -238,6 +239,9 @@ export const TaqwaStreakView: React.FC = () => {
           </div>
         </div>
       </div>
+
+      {/* Visual Progression Pattern: Luminous Trail & Celestial Orbit Ring */}
+      <TaqwaProgressionPattern />
 
       {/* All Milestones List Header */}
       <div className="space-y-3">

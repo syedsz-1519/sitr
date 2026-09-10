@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Bell, Clock, Compass, RefreshCw, CheckCircle2, ShieldCheck, Moon } from 'lucide-react';
 import { useSitrStore } from '../store/useSitrStore';
+import { DailyNotificationSchedulerCard } from '../components/DailyNotificationSchedulerCard';
 
 export const SmartAlertsView: React.FC = () => {
   const {
@@ -74,6 +75,9 @@ export const SmartAlertsView: React.FC = () => {
           </div>
         )}
       </div>
+
+      {/* Featured Daily Taqwa & Quranic Reflection Scheduler */}
+      <DailyNotificationSchedulerCard />
 
       {/* Live Prayer Times Card via Aladhan API */}
       <div className="rounded-2xl bg-[#170F26] border border-purple-900/30 p-5 space-y-4">

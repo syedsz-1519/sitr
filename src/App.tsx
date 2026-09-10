@@ -10,11 +10,14 @@ import { BottomNav } from './components/BottomNav';
 import { MenuDrawer } from './components/MenuDrawer';
 import { UrgentRescueModal } from './components/UrgentRescueModal';
 import { TechnicalNoteModal } from './components/TechnicalNoteModal';
+import { AuthModal } from './components/AuthModal';
+import { DailyReflectionModal } from './components/DailyReflectionModal';
 
 import { HomeDashboard } from './views/HomeDashboard';
 import { DhikrSanctuaryView } from './views/DhikrSanctuaryView';
 import { TaqwaStreakView } from './views/TaqwaStreakView';
 import { AyahReflectionView } from './views/AyahReflectionView';
+import { DailyReflectionView } from './views/DailyReflectionView';
 import { NafsScoreView } from './views/NafsScoreView';
 import { TemptationMapView } from './views/TemptationMapView';
 import { WeeklyReportView } from './views/WeeklyReportView';
@@ -69,6 +72,8 @@ export default function App() {
           return <ChallengesView />;
         case 'ayah_reflections':
           return <AyahReflectionView />;
+        case 'daily_reflection':
+          return <DailyReflectionView />;
         default:
           return <HomeDashboard onNavigate={handleSelectExtendedView} />;
       }
@@ -129,6 +134,12 @@ export default function App() {
 
       {/* Technical Architecture Note Modal */}
       <TechnicalNoteModal />
+
+      {/* Account Login & Sign Up Modal */}
+      <AuthModal />
+
+      {/* Daily Reflection & Muhasabah Journal Modal */}
+      <DailyReflectionModal />
     </div>
   );
 }

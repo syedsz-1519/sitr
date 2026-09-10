@@ -88,10 +88,22 @@ export interface SmartAlert {
   enabled: boolean;
 }
 
+export interface UserProfile {
+  name: string;
+  email: string;
+  isLoggedIn: boolean;
+  avatarColor?: string;
+  memberSince?: string;
+  accountType: 'guest' | 'standard' | 'founder';
+  cloudSyncEnabled: boolean;
+}
+
 export type NavTab = 'shield' | 'dhikr' | 'taqwa' | 'ayah';
 
 export type ExtendedView =
   | 'dashboard'
+  | 'daily_reflection'
+  | 'reminder_scheduler'
   | 'custom_block_mode'
   | 'nafs_score'
   | 'taqwa_streak'
@@ -104,3 +116,53 @@ export type ExtendedView =
   | 'challenges'
   | 'ayah_reflections'
   | 'full_analysis';
+
+export type ReminderContentType = 'both' | 'taqwa' | 'quran';
+
+export interface DailyReminderConfig {
+  enabled: boolean;
+  time: string; // "HH:MM" (24h)
+  contentType: ReminderContentType;
+  soundEnabled: boolean;
+  vibrate: boolean;
+  lastTriggeredDate?: string; // YYYY-MM-DD
+}
+
+export interface TaqwaReminderItem {
+  id: string;
+  title: string;
+  arabic?: string;
+  text: string;
+  source: string;
+  type: 'taqwa' | 'quran';
+  category: string;
+}
+
+export type SpiritualState = 'peaceful' | 'guarded' | 'tested' | 'repentant' | 'striving';
+
+export interface ReflectionPrompt {
+  id: string;
+  quote: {
+    arabic?: string;
+    text: string;
+    source: string;
+    category: 'muhasabah' | 'tawbah' | 'gratitude' | 'sabr' | 'istiqamah';
+  };
+  question: string;
+  subtext?: string;
+}
+
+export interface DailyReflectionEntry {
+  id: string;
+  date: string; // YYYY-MM-DD
+  timestamp: string; // ISO string
+  promptId?: string;
+  quoteText: string;
+  quoteSource: string;
+  quoteArabic?: string;
+  promptQuestion: string;
+  journalText: string;
+  spiritualState: SpiritualState;
+  gratitudeNote?: string;
+  cleanDayLogged: boolean;
+}
