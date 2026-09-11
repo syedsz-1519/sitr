@@ -12,6 +12,8 @@ import { UrgentRescueModal } from './components/UrgentRescueModal';
 import { TechnicalNoteModal } from './components/TechnicalNoteModal';
 import { AuthModal } from './components/AuthModal';
 import { DailyReflectionModal } from './components/DailyReflectionModal';
+import { DhikrBreathPauseModal } from './components/DhikrBreathPauseModal';
+import { DailyNotificationRunner } from './components/DailyNotificationRunner';
 
 import { HomeDashboard } from './views/HomeDashboard';
 import { DhikrSanctuaryView } from './views/DhikrSanctuaryView';
@@ -94,7 +96,7 @@ export default function App() {
   };
 
   return (
-    <div className="min-h-screen bg-[#0B0714] text-[#F5F3FF] flex flex-col selection:bg-purple-600 selection:text-white pb-20">
+    <div className="min-h-screen bg-[#04140E] text-[#F8F6EB] flex flex-col selection:bg-emerald-800 selection:text-amber-200 pb-20 islamic-radiance-bg">
       {/* Top Sticky Header */}
       <Header />
 
@@ -103,13 +105,14 @@ export default function App() {
         <div className="max-w-md mx-auto w-full px-4 pt-3 pb-1 flex items-center justify-between">
           <button
             onClick={() => setCurrentExtendedView(null)}
-            className="flex items-center gap-1.5 text-xs text-purple-300 hover:text-white transition-colors bg-[#170F26] px-3 py-1.5 rounded-full border border-purple-900/30"
+            className="flex items-center gap-1.5 text-xs text-amber-300 hover:text-white transition-colors bg-[#09261B] px-3 py-1.5 rounded-full border border-amber-500/25"
             type="button"
           >
-            <ArrowLeft className="w-3.5 h-3.5" />
+            <ArrowLeft className="w-3.5 h-3.5 text-amber-400" />
             <span>Back to Main</span>
           </button>
-          <span className="text-[10px] uppercase font-metric tracking-widest text-purple-400 font-semibold">
+          <span className="text-[10px] uppercase font-metric tracking-widest text-amber-400/90 font-semibold flex items-center gap-1">
+            <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 inline-block animate-pulse"></span>
             SITR Guardian
           </span>
         </div>
@@ -140,6 +143,12 @@ export default function App() {
 
       {/* Daily Reflection & Muhasabah Journal Modal */}
       <DailyReflectionModal />
+
+      {/* 30-Second Dhikr Breath Pause Modal */}
+      <DhikrBreathPauseModal />
+
+      {/* Automated Daily Taqwa & Quranic Reminder Runner */}
+      <DailyNotificationRunner onNavigate={handleSelectExtendedView} />
     </div>
   );
 }

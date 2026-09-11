@@ -140,14 +140,14 @@ export const DailyReflectionModal: React.FC = () => {
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/85 backdrop-blur-md overflow-y-auto animate-fadeIn">
       {/* Modal Container */}
-      <div className="relative w-full max-w-lg rounded-3xl bg-[#140A26] border border-purple-500/40 p-5 sm:p-6 shadow-[0_20px_60px_rgba(109,40,217,0.45)] text-white my-6 max-h-[92vh] overflow-y-auto">
+      <div className="relative w-full max-w-lg rounded-3xl bg-[#082318] border border-amber-500/40 p-5 sm:p-6 shadow-[0_20px_60px_rgba(4,20,14,0.7)] text-white my-6 max-h-[92vh] overflow-y-auto">
         {/* Subtle luminous header glow */}
-        <div className="absolute -top-10 inset-x-0 h-32 bg-purple-600/20 blur-3xl pointer-events-none" />
+        <div className="absolute -top-10 inset-x-0 h-32 bg-emerald-600/20 blur-3xl pointer-events-none" />
 
         {/* Close Button */}
         <button
           onClick={() => setDailyReflectionModalOpen(false)}
-          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#20103A] text-purple-300 hover:text-white flex items-center justify-center transition-colors border border-purple-800/40 z-20"
+          className="absolute top-4 right-4 w-8 h-8 rounded-full bg-[#061D14] text-amber-300 hover:text-white flex items-center justify-center transition-colors border border-amber-500/30 z-20 cursor-pointer"
           type="button"
           aria-label="Close"
         >
@@ -156,12 +156,12 @@ export const DailyReflectionModal: React.FC = () => {
 
         {/* Header */}
         <div className="flex items-center gap-3 mb-4 relative z-10">
-          <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#2D1459] to-[#170930] border border-purple-400/40 flex items-center justify-center text-amber-300 shadow-[0_0_18px_rgba(245,158,11,0.3)] shrink-0">
+          <div className="w-11 h-11 rounded-2xl bg-gradient-to-br from-[#0B3824] to-[#04160E] border border-amber-400/40 flex items-center justify-center text-amber-300 shadow-[0_0_18px_rgba(212,175,55,0.3)] shrink-0">
             <Moon className="w-5 h-5 fill-amber-400/40" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <h2 className="text-base sm:text-lg font-bold text-white tracking-tight">
+              <h2 className="text-base sm:text-lg font-bold text-amber-50 tracking-tight">
                 Daily Reflection & Muhasabah
               </h2>
               {existingEntry && (
@@ -170,14 +170,14 @@ export const DailyReflectionModal: React.FC = () => {
                 </span>
               )}
             </div>
-            <p className="text-xs text-purple-200/80 font-sans">
+            <p className="text-xs text-emerald-200/80 font-sans">
               "Hold yourselves accountable before you are held accountable."
             </p>
           </div>
         </div>
 
         {/* Islamic Quote Card */}
-        <div className="relative rounded-2xl bg-[#1D0E38]/90 border border-purple-700/40 p-4 mb-4 text-left shadow-inner">
+        <div className="relative rounded-2xl bg-[#061D14] border border-amber-500/25 p-4 mb-4 text-left shadow-inner">
           <div className="flex items-center justify-between gap-2 mb-2">
             <span className="text-[10px] uppercase font-metric tracking-widest text-amber-300 font-bold flex items-center gap-1.5">
               <Quote className="w-3 h-3" />
@@ -187,7 +187,7 @@ export const DailyReflectionModal: React.FC = () => {
             <button
               type="button"
               onClick={handleShufflePrompt}
-              className="text-[10px] font-metric font-semibold text-purple-300 hover:text-white flex items-center gap-1 bg-[#291350] hover:bg-[#341866] px-2 py-1 rounded-lg border border-purple-700/50 transition-colors"
+              className="text-[10px] font-metric font-semibold text-amber-300 hover:text-white flex items-center gap-1 bg-[#0B3322] hover:bg-[#0D3F2A] px-2 py-1 rounded-lg border border-amber-500/30 transition-colors cursor-pointer"
               title="View another prompt"
             >
               <Shuffle className="w-3 h-3" />
@@ -196,30 +196,30 @@ export const DailyReflectionModal: React.FC = () => {
           </div>
 
           {selectedPrompt.quote.arabic && (
-            <p className="text-sm text-amber-200/95 font-serif leading-relaxed mb-2 text-right font-arabic">
+            <p className="text-sm text-amber-200 font-serif leading-relaxed mb-2 text-right font-arabic">
               {selectedPrompt.quote.arabic}
             </p>
           )}
 
-          <p className="text-xs sm:text-sm text-purple-100 italic leading-relaxed font-sans">
+          <p className="text-xs sm:text-sm text-emerald-100 italic leading-relaxed font-sans">
             “{selectedPrompt.quote.text}”
           </p>
 
-          <span className="block text-[11px] text-purple-300/80 font-metric mt-1.5 font-medium">
+          <span className="block text-[11px] text-amber-300/80 font-metric mt-1.5 font-medium">
             — {selectedPrompt.quote.source}
           </span>
         </div>
 
         {/* The Reflection Question Banner */}
-        <div className="p-3.5 rounded-2xl bg-[#231245] border border-amber-500/30 mb-4 space-y-1">
+        <div className="p-3.5 rounded-2xl bg-[#0A2E1F] border border-amber-500/30 mb-4 space-y-1">
           <div className="flex items-start gap-2">
             <Sparkles className="w-4 h-4 text-amber-400 shrink-0 mt-0.5" />
             <div>
-              <p className="text-xs sm:text-sm font-bold text-white leading-snug">
+              <p className="text-xs sm:text-sm font-bold text-amber-50 leading-snug">
                 {selectedPrompt.question}
               </p>
               {selectedPrompt.subtext && (
-                <p className="text-[11px] text-purple-200/80 mt-1 leading-relaxed">
+                <p className="text-[11px] text-emerald-200/80 mt-1 leading-relaxed">
                   {selectedPrompt.subtext}
                 </p>
               )}
@@ -231,7 +231,7 @@ export const DailyReflectionModal: React.FC = () => {
         <form onSubmit={handleSubmit} className="space-y-4">
           {/* Spiritual State Selector */}
           <div>
-            <label className="block text-[11px] uppercase font-metric tracking-wider text-purple-300 font-bold mb-1.5">
+            <label className="block text-[11px] uppercase font-metric tracking-wider text-amber-300 font-bold mb-1.5">
               Today's Spiritual State of Nafs
             </label>
             <div className="grid grid-cols-2 sm:grid-cols-3 gap-2">
@@ -240,10 +240,10 @@ export const DailyReflectionModal: React.FC = () => {
                   key={st.id}
                   type="button"
                   onClick={() => setSpiritualState(st.id)}
-                  className={`p-2 rounded-xl text-left border transition-all flex items-center gap-2 ${
+                  className={`p-2 rounded-xl text-left border transition-all flex items-center gap-2 cursor-pointer ${
                     spiritualState === st.id
-                      ? 'bg-purple-600/40 border-purple-400 text-white ring-2 ring-purple-400/50 shadow-md'
-                      : 'bg-[#180C30] border-purple-900/40 text-purple-300 hover:border-purple-700'
+                      ? 'bg-emerald-600/40 border-amber-400 text-amber-50 ring-2 ring-amber-400/50 shadow-md'
+                      : 'bg-[#061D14] border-amber-500/20 text-emerald-200/80 hover:border-amber-500/40'
                   }`}
                 >
                   <span className="text-lg select-none">{st.icon}</span>
@@ -251,7 +251,7 @@ export const DailyReflectionModal: React.FC = () => {
                     <span className="text-xs font-bold block truncate leading-tight">
                       {st.label}
                     </span>
-                    <span className="text-[9px] text-purple-300/70 block truncate leading-tight">
+                    <span className="text-[9px] text-emerald-300/70 block truncate leading-tight">
                       {st.description}
                     </span>
                   </div>
@@ -263,10 +263,10 @@ export const DailyReflectionModal: React.FC = () => {
           {/* Journal Textarea */}
           <div>
             <div className="flex items-center justify-between mb-1.5">
-              <label className="text-[11px] uppercase font-metric tracking-wider text-purple-300 font-bold">
+              <label className="text-[11px] uppercase font-metric tracking-wider text-amber-300 font-bold">
                 Your Nightly Journal (Private with Allah)
               </label>
-              <span className="text-[10px] font-metric text-purple-300/60">
+              <span className="text-[10px] font-metric text-emerald-300/60">
                 {wordCount} {wordCount === 1 ? 'word' : 'words'}
               </span>
             </div>
@@ -276,13 +276,13 @@ export const DailyReflectionModal: React.FC = () => {
               onChange={(e) => setJournalText(e.target.value)}
               placeholder="Write honestly: what challenged you today, what sins or triggers did you evade, which prayers gave you sakinah, and what do you resolve for tomorrow?"
               rows={4}
-              className="w-full bg-[#110722] border border-purple-800/60 rounded-2xl p-3.5 text-xs sm:text-sm text-white placeholder-purple-400/30 focus:outline-none focus:border-purple-400 focus:ring-1 focus:ring-purple-400/40 leading-relaxed resize-none shadow-inner"
+              className="w-full bg-[#04160F] border border-amber-500/30 rounded-2xl p-3.5 text-xs sm:text-sm text-white placeholder-emerald-400/30 focus:outline-none focus:border-amber-400 focus:ring-1 focus:ring-amber-400/40 leading-relaxed resize-none shadow-inner"
             />
           </div>
 
           {/* Gratitude & Istighfar Note */}
           <div>
-            <label className="block text-[11px] uppercase font-metric tracking-wider text-purple-300 font-bold mb-1">
+            <label className="block text-[11px] uppercase font-metric tracking-wider text-amber-300 font-bold mb-1">
               One Blessing or Dua Before Sleep (Shukr / Istighfar)
             </label>
             <input
@@ -290,23 +290,23 @@ export const DailyReflectionModal: React.FC = () => {
               value={gratitudeNote}
               onChange={(e) => setGratitudeNote(e.target.value)}
               placeholder="e.g., Grateful for praying Asr in congregation; Astaghfirullah for moments of frustration."
-              className="w-full bg-[#110722] border border-purple-800/60 rounded-xl px-3.5 py-2 text-xs text-white placeholder-purple-400/30 focus:outline-none focus:border-purple-400"
+              className="w-full bg-[#04160F] border border-amber-500/30 rounded-xl px-3.5 py-2 text-xs text-white placeholder-emerald-400/30 focus:outline-none focus:border-amber-400"
             />
           </div>
 
           {/* Clean Day Log Checkbox */}
-          <label className="flex items-start gap-2.5 p-3 rounded-xl bg-[#190E33] border border-purple-800/40 cursor-pointer select-none">
+          <label className="flex items-start gap-2.5 p-3 rounded-xl bg-[#061D14] border border-amber-500/25 cursor-pointer select-none">
             <input
               type="checkbox"
               checked={cleanDayLogged}
               onChange={(e) => setCleanDayLogged(e.target.checked)}
-              className="mt-0.5 rounded border-purple-700 text-purple-600 focus:ring-0 accent-purple-600"
+              className="mt-0.5 rounded border-amber-500 text-emerald-600 focus:ring-0 accent-emerald-600 cursor-pointer"
             />
             <div>
               <span className="text-xs font-bold text-emerald-300 block">
                 Seal Today as Clean in Taqwa Streak (+1 Day)
               </span>
-              <span className="text-[10px] text-purple-300/80 block leading-tight">
+              <span className="text-[10px] text-emerald-300/80 block leading-tight">
                 Marks that you guarded your modesty and resisted digital triggers today.
               </span>
             </div>
@@ -324,14 +324,14 @@ export const DailyReflectionModal: React.FC = () => {
             <button
               type="button"
               onClick={() => setDailyReflectionModalOpen(false)}
-              className="w-1/3 py-2.5 px-3 rounded-xl bg-[#20103A] hover:bg-[#2B144E] text-purple-200 text-xs font-semibold font-metric transition-colors"
+              className="w-1/3 py-2.5 px-3 rounded-xl bg-[#061D14] hover:bg-[#0B3322] border border-amber-500/20 text-emerald-200 text-xs font-semibold font-metric transition-colors cursor-pointer"
             >
               Cancel
             </button>
 
             <button
               type="submit"
-              className="w-2/3 py-2.5 px-4 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold font-metric shadow-[0_4px_16px_rgba(124,58,237,0.45)] flex items-center justify-center gap-2 transition-all active:scale-[0.98]"
+              className="w-2/3 py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white text-xs font-bold font-metric shadow-[0_4px_16px_rgba(16,185,129,0.35)] flex items-center justify-center gap-2 transition-all active:scale-[0.98] cursor-pointer"
             >
               <Send className="w-3.5 h-3.5" />
               <span>{existingEntry ? 'Update Reflection' : 'Seal Tonight’s Muhasabah'}</span>

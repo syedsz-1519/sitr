@@ -69,6 +69,10 @@ interface SitrState {
   activeTaqwaReminder: TaqwaReminderItem | null;
   reminderSchedulerModalOpen: boolean;
 
+  // Dhikr Breath Pause
+  breathPauseModalOpen: boolean;
+  breathPausesCompleted: number;
+
   // Actions
   toggleArmed: () => void;
   toggleNightGuard: () => void;
@@ -118,6 +122,8 @@ interface SitrState {
   setUrgentRescueOpen: (open: boolean, reason?: string) => void;
   setTechnicalNoteOpen: (open: boolean) => void;
   setMenuDrawerOpen: (open: boolean) => void;
+  setBreathPauseModalOpen: (open: boolean) => void;
+  incrementBreathPause: () => void;
 
   // Computed helper
   getNafsScore: () => {
@@ -290,6 +296,10 @@ export const useSitrStore = create<SitrState>()(
       },
       activeTaqwaReminder: null,
       reminderSchedulerModalOpen: false,
+
+      // Dhikr Breath Pause
+      breathPauseModalOpen: false,
+      breathPausesCompleted: 0,
 
       toggleArmed: () => set((s) => ({ isArmed: !s.isArmed })),
       toggleNightGuard: () => set((s) => ({ nightGuard: !s.nightGuard })),
@@ -668,6 +678,12 @@ export const useSitrStore = create<SitrState>()(
         set({ urgentRescueOpen: open, lastInterventionReason: reason }),
       setTechnicalNoteOpen: (open) => set({ technicalNoteOpen: open }),
       setMenuDrawerOpen: (open) => set({ menuDrawerOpen: open }),
+      setBreathPauseModalOpen: (open) => set({ breathPauseModalOpen: open }),
+      incrementBreathPause: () =>
+        set((s) => ({
+          breathPausesCompleted: s.breathPausesCompleted + 1,
+          dhikrSessionsCompletedToday: s.dhikrSessionsCompletedToday + 1,
+        })),
 
       getNafsScore: () => {
         const { events, dhikrSessionsCompletedToday, currentStreak } = get();
@@ -729,6 +745,7 @@ export const useSitrStore = create<SitrState>()(
         customRules: state.customRules,
         dailyReflections: state.dailyReflections,
         dailyReminderConfig: state.dailyReminderConfig,
+        breathPausesCompleted: state.breathPausesCompleted,
       }),
     }
   )

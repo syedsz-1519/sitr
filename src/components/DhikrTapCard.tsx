@@ -78,9 +78,9 @@ export const DhikrTapCard: React.FC<DhikrTapCardProps> = ({
   };
 
   return (
-    <div className="w-full rounded-2xl bg-[#170F26] border border-purple-900/30 p-5 flex flex-col items-center text-center shadow-lg relative overflow-hidden">
+    <div className="w-full rounded-2xl bg-[#061D14] border border-amber-500/30 p-5 flex flex-col items-center text-center shadow-lg relative overflow-hidden">
       {/* Soft atmospheric ambient glow */}
-      <div className="absolute -top-10 -right-10 w-32 h-32 bg-purple-600/10 rounded-full blur-2xl pointer-events-none"></div>
+      <div className="absolute -top-10 -right-10 w-32 h-32 bg-emerald-600/10 rounded-full blur-2xl pointer-events-none"></div>
       <div className="absolute -bottom-10 -left-10 w-32 h-32 bg-amber-500/10 rounded-full blur-2xl pointer-events-none"></div>
 
       {/* Header Prompt */}
@@ -92,13 +92,13 @@ export const DhikrTapCard: React.FC<DhikrTapCardProps> = ({
       </div>
 
       {/* Arabic Dhikr Calligraphy */}
-      <h3 className="font-arabic text-2xl sm:text-3xl text-white my-2 leading-relaxed tracking-wide select-none drop-shadow-sm">
+      <h3 className="font-arabic text-2xl sm:text-3xl text-amber-50 my-2 leading-relaxed tracking-wide select-none drop-shadow-sm">
         {currentDhikr.arabic}
       </h3>
 
       {/* Transliteration & Meaning */}
-      <p className="text-xs text-purple-200/80 font-medium max-w-xs leading-normal opacity-90 mb-4">
-        <span className="text-purple-300 font-semibold">{currentDhikr.transliteration}</span>
+      <p className="text-xs text-emerald-200/80 font-medium max-w-xs leading-normal opacity-90 mb-4">
+        <span className="text-amber-300 font-semibold">{currentDhikr.transliteration}</span>
         <span className="mx-1.5 opacity-60">•</span>
         <span>{currentDhikr.meaning}</span>
       </p>
@@ -108,7 +108,7 @@ export const DhikrTapCard: React.FC<DhikrTapCardProps> = ({
         <button
           onClick={handleTap}
           aria-label="Tap to increment Dhikr"
-          className={`relative rounded-full flex flex-col items-center justify-center bg-[#1F1435] shadow-[0_0_24px_rgba(124,58,237,0.25)] transition-transform duration-100 focus:outline-none cursor-pointer group ${
+          className={`relative rounded-full flex flex-col items-center justify-center bg-[#08261A] shadow-[0_0_24px_rgba(212,175,55,0.25)] transition-transform duration-100 focus:outline-none cursor-pointer group ${
             compact ? 'w-36 h-36' : 'w-44 h-44'
           } ${isPressing ? 'scale-95' : 'active:scale-95'}`}
           type="button"
@@ -120,7 +120,7 @@ export const DhikrTapCard: React.FC<DhikrTapCardProps> = ({
           >
             {/* Background Track */}
             <circle
-              className="text-[#2B1B48]"
+              className="text-[#04160E]"
               cx="80"
               cy="80"
               fill="none"
@@ -131,7 +131,7 @@ export const DhikrTapCard: React.FC<DhikrTapCardProps> = ({
             {/* Dynamic Fill Circle */}
             <circle
               className={`transition-all duration-200 ${
-                isComplete ? 'text-amber-400' : 'text-purple-500'
+                isComplete ? 'text-amber-400' : 'text-emerald-500'
               }`}
               cx="80"
               cy="80"
@@ -144,15 +144,15 @@ export const DhikrTapCard: React.FC<DhikrTapCardProps> = ({
               strokeWidth={strokeWidth}
               style={{
                 filter: isComplete
-                  ? 'drop-shadow(0 0 10px rgba(212, 160, 23, 0.7))'
-                  : 'drop-shadow(0 0 8px rgba(124, 58, 237, 0.5))',
+                  ? 'drop-shadow(0 0 10px rgba(212, 175, 55, 0.7))'
+                  : 'drop-shadow(0 0 8px rgba(16, 185, 129, 0.5))',
               }}
             />
           </svg>
 
           {/* Inner Soft Tactile Core */}
           <div
-            className={`rounded-full bg-gradient-to-b from-[#2B1B48] to-[#170F26] border border-purple-500/20 flex flex-col items-center justify-center shadow-inner pointer-events-none group-active:from-purple-900/40 ${
+            className={`rounded-full bg-gradient-to-b from-[#0B3824] to-[#04160E] border border-amber-500/30 flex flex-col items-center justify-center shadow-inner pointer-events-none group-active:from-emerald-900/40 ${
               compact ? 'w-24 h-24' : 'w-30 h-30'
             }`}
           >
@@ -168,7 +168,7 @@ export const DhikrTapCard: React.FC<DhikrTapCardProps> = ({
                 <span className="font-metric text-4xl sm:text-5xl font-bold text-white leading-none">
                   {dhikrCount}
                 </span>
-                <span className="text-xs text-purple-300/70 font-metric mt-1">
+                <span className="text-xs text-amber-300/80 font-metric mt-1">
                   / {dhikrTarget}
                 </span>
               </>
@@ -181,7 +181,7 @@ export const DhikrTapCard: React.FC<DhikrTapCardProps> = ({
       <div className="flex items-center justify-between w-full max-w-[240px] mt-4 pt-1">
         <span
           className={`text-xs uppercase font-metric tracking-wider font-semibold ${
-            isComplete ? 'text-amber-300' : 'text-purple-300/80'
+            isComplete ? 'text-amber-300' : 'text-emerald-300/80'
           }`}
         >
           {isComplete ? 'Complete — Alhamdulillah' : `${remaining} remaining`}
@@ -189,7 +189,7 @@ export const DhikrTapCard: React.FC<DhikrTapCardProps> = ({
         <button
           onClick={resetDhikr}
           aria-label="Reset Dhikr counter"
-          className="text-xs font-metric text-purple-400 hover:text-purple-200 uppercase tracking-wider flex items-center gap-1 focus:outline-none transition-colors"
+          className="text-xs font-metric text-amber-300 hover:text-amber-100 uppercase tracking-wider flex items-center gap-1 focus:outline-none transition-colors cursor-pointer"
           type="button"
         >
           <RefreshCw className="w-3 h-3" />

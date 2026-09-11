@@ -74,15 +74,15 @@ export const CustomBlockModeView: React.FC = () => {
       {/* Top Title & Subtitle */}
       <div>
         <div className="flex items-center gap-2.5">
-          <div className="text-purple-400">
-            <Shield className="w-7 h-7 fill-purple-900/30" />
+          <div className="text-amber-400">
+            <Shield className="w-7 h-7 fill-emerald-900/30" />
           </div>
-          <h1 className="text-2xl font-extrabold text-white tracking-tight">
+          <h1 className="text-2xl font-extrabold text-amber-50 tracking-tight">
             Custom Block Mode
           </h1>
         </div>
-        <p className="text-xs text-purple-200/70 mt-1">
-          Block any app, site, or keyword — your rules, bhai.
+        <p className="text-xs text-emerald-200/80 mt-1">
+          Block any app, site, or keyword — your rules, akhi.
         </p>
       </div>
 
@@ -90,15 +90,15 @@ export const CustomBlockModeView: React.FC = () => {
       <button
         onClick={toggleCustomBlockMode}
         type="button"
-        className={`w-full py-3.5 px-6 rounded-full border transition-all duration-300 flex items-center justify-center gap-2.5 font-metric text-xs uppercase tracking-widest font-bold select-none ${
+        className={`w-full py-3.5 px-6 rounded-full border transition-all duration-300 flex items-center justify-center gap-2.5 font-metric text-xs uppercase tracking-widest font-bold select-none cursor-pointer ${
           customBlockModeEnabled
-            ? 'bg-gradient-to-r from-purple-700 via-purple-600 to-indigo-600 border-purple-400/70 text-white shadow-[0_0_24px_rgba(124,58,237,0.4)] ring-1 ring-purple-300/40'
-            : 'bg-[#120B20] border-purple-900/50 text-purple-300/80 hover:border-purple-700/60 hover:text-white'
+            ? 'bg-gradient-to-r from-emerald-600 via-emerald-700 to-teal-700 border-amber-400/80 text-white shadow-[0_0_24px_rgba(16,185,129,0.4)] ring-1 ring-amber-300/40'
+            : 'bg-[#061D14] border-amber-500/30 text-emerald-200/80 hover:border-amber-500/60 hover:text-white'
         }`}
       >
         <Zap
           className={`w-4 h-4 ${
-            customBlockModeEnabled ? 'fill-amber-300 text-amber-300 animate-pulse' : 'text-purple-400'
+            customBlockModeEnabled ? 'fill-amber-300 text-amber-300 animate-pulse' : 'text-amber-400'
           }`}
         />
         <span>{customBlockModeEnabled ? 'MODE ACTIVE (ON)' : 'MODE OFF'}</span>
@@ -107,52 +107,52 @@ export const CustomBlockModeView: React.FC = () => {
       {/* 3 Metric Stat Cards */}
       <div className="grid grid-cols-3 gap-2.5">
         {/* Card 1: TOTAL RULES */}
-        <div className="bg-[#120B20] border border-purple-900/30 rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-sm">
+        <div className="bg-[#061D14] border border-amber-500/25 rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-sm">
           <span className="text-2xl sm:text-3xl font-extrabold text-white font-metric">
             {totalRules}
           </span>
-          <span className="text-[9px] uppercase font-metric tracking-wider text-purple-300/70 font-semibold mt-1">
+          <span className="text-[9px] uppercase font-metric tracking-wider text-emerald-200/70 font-semibold mt-1">
             TOTAL RULES
           </span>
         </div>
 
         {/* Card 2: ACTIVE BLOCKS */}
-        <div className="bg-[#120B20] border border-purple-900/30 rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-sm">
+        <div className="bg-[#061D14] border border-amber-500/25 rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-sm">
           <span className="text-2xl sm:text-3xl font-extrabold text-white font-metric">
             {activeBlocks}
           </span>
-          <span className="text-[9px] uppercase font-metric tracking-wider text-purple-300/70 font-semibold mt-1">
+          <span className="text-[9px] uppercase font-metric tracking-wider text-emerald-200/70 font-semibold mt-1">
             ACTIVE BLOCKS
           </span>
         </div>
 
         {/* Card 3: MODE STATUS */}
-        <div className="bg-[#120B20] border border-purple-900/30 rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-sm">
+        <div className="bg-[#061D14] border border-amber-500/25 rounded-2xl p-4 flex flex-col items-center justify-center text-center shadow-sm">
           <div className="flex items-center gap-1">
             <span
               className={`w-2 h-2 rounded-full ${
-                customBlockModeEnabled ? 'bg-emerald-400 shadow-[0_0_8px_#22c55e]' : 'border border-purple-300/60'
+                customBlockModeEnabled ? 'bg-emerald-400 shadow-[0_0_8px_#22c55e]' : 'border border-amber-300/60'
               }`}
             />
             <span className="text-2xl sm:text-3xl font-extrabold text-white font-metric">
               {customBlockModeEnabled ? 'On' : 'Off'}
             </span>
           </div>
-          <span className="text-[9px] uppercase font-metric tracking-wider text-purple-300/70 font-semibold mt-1">
+          <span className="text-[9px] uppercase font-metric tracking-wider text-emerald-200/70 font-semibold mt-1">
             MODE
           </span>
         </div>
       </div>
 
       {/* Action Header Card: Add New Block Rule */}
-      <div className="bg-[#120B20] border border-purple-900/30 rounded-2xl p-4 flex items-center justify-between gap-3 shadow-sm">
-        <span className="text-sm sm:text-base font-bold text-white">
+      <div className="bg-[#061D14] border border-amber-500/25 rounded-2xl p-4 flex items-center justify-between gap-3 shadow-sm">
+        <span className="text-sm sm:text-base font-bold text-amber-50">
           Add New Block Rule
         </span>
         <button
           onClick={() => setIsAddOpen(!isAddOpen)}
           type="button"
-          className="bg-purple-600 hover:bg-purple-500 active:scale-95 transition-all text-white text-xs font-semibold px-4 py-2 rounded-full flex items-center gap-1.5 shadow-[0_2px_12px_rgba(124,58,237,0.35)]"
+          className="bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 active:scale-95 transition-all text-white text-xs font-semibold px-4 py-2 rounded-full flex items-center gap-1.5 shadow-[0_2px_12px_rgba(16,185,129,0.35)] cursor-pointer"
         >
           {isAddOpen ? <X className="w-3.5 h-3.5" /> : <Plus className="w-3.5 h-3.5" />}
           <span>{isAddOpen ? 'Close' : '+ Add Rule'}</span>
@@ -163,13 +163,13 @@ export const CustomBlockModeView: React.FC = () => {
       {isAddOpen && (
         <form
           onSubmit={handleAddRule}
-          className="bg-[#170F26] border border-purple-800/40 rounded-2xl p-5 space-y-4 shadow-xl animate-in fade-in slide-in-from-top-2 duration-200"
+          className="bg-[#08261A] border border-amber-500/35 rounded-2xl p-5 space-y-4 shadow-xl animate-in fade-in slide-in-from-top-2 duration-200"
         >
-          <div className="flex items-center justify-between pb-2 border-b border-purple-900/40">
-            <span className="text-xs font-bold uppercase font-metric tracking-wider text-white">
+          <div className="flex items-center justify-between pb-2 border-b border-amber-500/20">
+            <span className="text-xs font-bold uppercase font-metric tracking-wider text-amber-50">
               Create Custom Rule
             </span>
-            <span className="text-[10px] text-purple-300/70 font-metric">
+            <span className="text-[10px] text-emerald-200/70 font-metric">
               Instant local shield
             </span>
           </div>
@@ -179,10 +179,10 @@ export const CustomBlockModeView: React.FC = () => {
             <button
               type="button"
               onClick={() => setRuleType('app')}
-              className={`py-2 px-3 rounded-xl text-xs font-semibold font-metric flex items-center justify-center gap-1.5 transition-all ${
+              className={`py-2 px-3 rounded-xl text-xs font-semibold font-metric flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
                 ruleType === 'app'
-                  ? 'bg-purple-600 text-white shadow-md'
-                  : 'bg-[#10081C] text-purple-300/70 border border-purple-900/40 hover:text-white'
+                  ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md'
+                  : 'bg-[#04160E] text-emerald-200/70 border border-amber-500/25 hover:text-white'
               }`}
             >
               <Smartphone className="w-3.5 h-3.5" />
@@ -192,10 +192,10 @@ export const CustomBlockModeView: React.FC = () => {
             <button
               type="button"
               onClick={() => setRuleType('website')}
-              className={`py-2 px-3 rounded-xl text-xs font-semibold font-metric flex items-center justify-center gap-1.5 transition-all ${
+              className={`py-2 px-3 rounded-xl text-xs font-semibold font-metric flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
                 ruleType === 'website'
-                  ? 'bg-purple-600 text-white shadow-md'
-                  : 'bg-[#10081C] text-purple-300/70 border border-purple-900/40 hover:text-white'
+                  ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md'
+                  : 'bg-[#04160E] text-emerald-200/70 border border-amber-500/25 hover:text-white'
               }`}
             >
               <Globe className="w-3.5 h-3.5" />
@@ -205,10 +205,10 @@ export const CustomBlockModeView: React.FC = () => {
             <button
               type="button"
               onClick={() => setRuleType('keyword')}
-              className={`py-2 px-3 rounded-xl text-xs font-semibold font-metric flex items-center justify-center gap-1.5 transition-all ${
+              className={`py-2 px-3 rounded-xl text-xs font-semibold font-metric flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
                 ruleType === 'keyword'
-                  ? 'bg-purple-600 text-white shadow-md'
-                  : 'bg-[#10081C] text-purple-300/70 border border-purple-900/40 hover:text-white'
+                  ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-md'
+                  : 'bg-[#04160E] text-emerald-200/70 border border-amber-500/25 hover:text-white'
               }`}
             >
               <Tag className="w-3.5 h-3.5" />
@@ -218,7 +218,7 @@ export const CustomBlockModeView: React.FC = () => {
 
           {/* Label Input */}
           <div className="space-y-1">
-            <label className="text-[11px] text-purple-200/80 font-medium block">
+            <label className="text-[11px] text-emerald-200/80 font-medium block">
               Rule Display Name
             </label>
             <input
@@ -232,13 +232,13 @@ export const CustomBlockModeView: React.FC = () => {
                   ? 'e.g. Celebrity Gossip Blog'
                   : 'e.g. Lustful phrases, NSFW triggers'
               }
-              className="w-full bg-[#10081C] border border-purple-900/50 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-purple-400/40 focus:outline-none focus:border-purple-500 transition-colors"
+              className="w-full bg-[#04160E] border border-amber-500/30 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-emerald-400/40 focus:outline-none focus:border-amber-400 transition-colors"
             />
           </div>
 
           {/* Target Input */}
           <div className="space-y-1">
-            <label className="text-[11px] text-purple-200/80 font-medium block">
+            <label className="text-[11px] text-emerald-200/80 font-medium block">
               Target ({ruleType === 'app' ? 'Package / Identifier' : ruleType === 'website' ? 'Domain URL' : 'Keywords separated by comma'})
             </label>
             <input
@@ -252,7 +252,7 @@ export const CustomBlockModeView: React.FC = () => {
                   ? 'example.com or reddit.com'
                   : 'nsfw, thirst, adult'
               }
-              className="w-full bg-[#10081C] border border-purple-900/50 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-purple-400/40 focus:outline-none focus:border-purple-500 transition-colors"
+              className="w-full bg-[#04160E] border border-amber-500/30 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-emerald-400/40 focus:outline-none focus:border-amber-400 transition-colors"
             />
           </div>
 
@@ -261,14 +261,14 @@ export const CustomBlockModeView: React.FC = () => {
           <div className="flex items-center gap-2 pt-1">
             <button
               type="submit"
-              className="flex-1 py-2.5 px-4 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs uppercase tracking-wider font-metric transition-colors shadow-md"
+              className="flex-1 py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold text-xs uppercase tracking-wider font-metric transition-colors shadow-md cursor-pointer"
             >
               Add Block Rule
             </button>
             <button
               type="button"
               onClick={() => setIsAddOpen(false)}
-              className="py-2.5 px-4 rounded-xl bg-[#10081C] hover:bg-[#1a0f2e] text-purple-300 text-xs font-semibold border border-purple-900/40 transition-colors"
+              className="py-2.5 px-4 rounded-xl bg-[#04160E] hover:bg-[#08261A] text-emerald-200 text-xs font-semibold border border-amber-500/25 transition-colors cursor-pointer"
             >
               Cancel
             </button>
@@ -278,26 +278,26 @@ export const CustomBlockModeView: React.FC = () => {
 
       {/* Main Container / Empty State or Rule List */}
       {customRules.length === 0 ? (
-        <div className="bg-[#120B20] border border-purple-900/30 rounded-3xl p-8 flex flex-col items-center justify-center text-center space-y-4 shadow-sm min-h-[220px]">
-          {/* Metallic Cyan Tinted Shield Icon matching user's design */}
+        <div className="bg-[#061D14] border border-amber-500/25 rounded-3xl p-8 flex flex-col items-center justify-center text-center space-y-4 shadow-sm min-h-[220px]">
+          {/* Islamic Gold/Emerald Shield Icon */}
           <div className="relative">
-            <div className="w-16 h-16 rounded-2xl bg-gradient-to-b from-[#1C2C3E] via-[#161C2C] to-[#120B20] border border-sky-400/40 flex items-center justify-center shadow-[0_0_25px_rgba(56,189,248,0.2)]">
-              <Shield className="w-9 h-9 text-sky-200 fill-sky-300/20 drop-shadow-[0_2px_8px_rgba(56,189,248,0.4)]" />
+            <div className="w-16 h-16 rounded-2xl bg-gradient-to-b from-[#0D3827] via-[#08261A] to-[#061D14] border border-amber-500/40 flex items-center justify-center shadow-[0_0_25px_rgba(212,175,55,0.2)]">
+              <Shield className="w-9 h-9 text-amber-300 fill-amber-300/20 drop-shadow-[0_2px_8px_rgba(212,175,55,0.4)]" />
             </div>
           </div>
 
           <div className="space-y-1 max-w-[280px]">
-            <h2 className="text-base font-bold text-white tracking-tight">
+            <h2 className="text-base font-bold text-amber-50 tracking-tight">
               No custom rules yet
             </h2>
-            <p className="text-xs text-purple-200/60 leading-relaxed">
+            <p className="text-xs text-emerald-200/60 leading-relaxed">
               Add any app, website, or keyword above to protect your eyes and focus.
             </p>
           </div>
 
           {/* Quick presets shortcut */}
           <div className="pt-2 w-full max-w-[320px]">
-            <span className="text-[10px] uppercase font-metric tracking-widest text-purple-400 font-semibold block mb-2">
+            <span className="text-[10px] uppercase font-metric tracking-widest text-amber-300/80 font-semibold block mb-2">
               Popular Quick Presets
             </span>
             <div className="flex flex-wrap items-center justify-center gap-1.5">
@@ -306,7 +306,7 @@ export const CustomBlockModeView: React.FC = () => {
                   key={preset.label}
                   type="button"
                   onClick={() => handleQuickPreset(preset)}
-                  className="px-3 py-1 rounded-full bg-[#1A112E] hover:bg-purple-900/50 border border-purple-800/40 text-purple-200 text-[11px] font-medium transition-colors"
+                  className="px-3 py-1 rounded-full bg-[#08261A] hover:bg-[#0B3824] border border-amber-500/30 text-amber-200 text-[11px] font-medium transition-colors cursor-pointer"
                 >
                   + {preset.label}
                 </button>
@@ -317,10 +317,10 @@ export const CustomBlockModeView: React.FC = () => {
       ) : (
         <div className="space-y-3">
           <div className="flex items-center justify-between px-1">
-            <span className="text-xs font-bold uppercase font-metric tracking-wider text-white">
+            <span className="text-xs font-bold uppercase font-metric tracking-wider text-amber-50">
               Your Custom Rules ({customRules.length})
             </span>
-            <span className="text-[10px] text-purple-400 font-metric">
+            <span className="text-[10px] text-amber-400 font-metric">
               {customBlockModeEnabled ? 'Rules Active' : 'Enable Mode to Enforce'}
             </span>
           </div>
@@ -329,16 +329,16 @@ export const CustomBlockModeView: React.FC = () => {
             {customRules.map((rule) => (
               <div
                 key={rule.id}
-                className="bg-[#120B20] border border-purple-900/30 hover:border-purple-800/50 rounded-2xl p-4 flex items-center justify-between gap-3 shadow-sm transition-all"
+                className="bg-[#061D14] border border-amber-500/25 hover:border-amber-500/50 rounded-2xl p-4 flex items-center justify-between gap-3 shadow-sm transition-all"
               >
                 <div className="flex items-center gap-3 min-w-0">
-                  <div className="w-10 h-10 rounded-xl bg-[#1B112E] border border-purple-800/40 flex items-center justify-center text-purple-300 shrink-0">
+                  <div className="w-10 h-10 rounded-xl bg-[#08261A] border border-amber-500/30 flex items-center justify-center text-amber-300 shrink-0">
                     {rule.type === 'app' ? (
-                      <Smartphone className="w-4 h-4 text-purple-400" />
+                      <Smartphone className="w-4 h-4 text-amber-400" />
                     ) : rule.type === 'website' ? (
-                      <Globe className="w-4 h-4 text-sky-400" />
+                      <Globe className="w-4 h-4 text-emerald-400" />
                     ) : (
-                      <Tag className="w-4 h-4 text-amber-400" />
+                      <Tag className="w-4 h-4 text-amber-300" />
                     )}
                   </div>
 
@@ -347,11 +347,11 @@ export const CustomBlockModeView: React.FC = () => {
                       <span className="text-xs font-bold text-white truncate block">
                         {rule.label}
                       </span>
-                      <span className="text-[9px] uppercase font-metric px-1.5 py-0.5 rounded bg-purple-950 text-purple-300 border border-purple-800/40">
+                      <span className="text-[9px] uppercase font-metric px-1.5 py-0.5 rounded bg-[#04160E] text-amber-300 border border-amber-500/30">
                         {rule.type}
                       </span>
                     </div>
-                    <span className="text-[10px] text-purple-300/60 truncate block font-metric">
+                    <span className="text-[10px] text-emerald-200/60 truncate block font-metric">
                       {rule.target}
                     </span>
                   </div>
@@ -361,18 +361,18 @@ export const CustomBlockModeView: React.FC = () => {
                   {/* Test Intercept Simulation */}
                   <button
                     onClick={() => simulateBlockPrompt(rule)}
-                    className="p-1.5 rounded-lg bg-[#1B112E] hover:bg-purple-900/40 text-purple-300 hover:text-white transition-colors"
+                    className="p-1.5 rounded-lg bg-[#08261A] hover:bg-[#0B3824] text-amber-300 hover:text-white transition-colors cursor-pointer"
                     title="Simulate block screen"
                     type="button"
                   >
-                    <Play className="w-3.5 h-3.5 fill-purple-400 text-purple-400" />
+                    <Play className="w-3.5 h-3.5 fill-amber-400 text-amber-400" />
                   </button>
 
                   {/* Toggle Active Switch */}
                   <button
                     onClick={() => toggleCustomRule(rule.id)}
-                    className={`w-9 h-5 rounded-full p-0.5 transition-colors relative flex items-center ${
-                      rule.enabled ? 'bg-purple-600' : 'bg-zinc-800'
+                    className={`w-9 h-5 rounded-full p-0.5 transition-colors relative flex items-center cursor-pointer ${
+                      rule.enabled ? 'bg-emerald-500' : 'bg-zinc-800'
                     }`}
                     type="button"
                   >
@@ -386,7 +386,7 @@ export const CustomBlockModeView: React.FC = () => {
                   {/* Delete Rule */}
                   <button
                     onClick={() => deleteCustomRule(rule.id)}
-                    className="p-1.5 rounded-lg text-purple-400/50 hover:text-rose-400 transition-colors"
+                    className="p-1.5 rounded-lg text-emerald-400/50 hover:text-rose-400 transition-colors cursor-pointer"
                     type="button"
                     title="Delete rule"
                   >
@@ -400,14 +400,14 @@ export const CustomBlockModeView: React.FC = () => {
       )}
 
       {/* Helpful Companion Note */}
-      <div className="rounded-2xl bg-[#170F26] border border-purple-900/30 p-4 flex items-center justify-between gap-3">
+      <div className="rounded-2xl bg-[#061D14] border border-amber-500/25 p-4 flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className="w-8 h-8 rounded-xl bg-purple-950/80 border border-purple-800/40 flex items-center justify-center text-purple-300 shrink-0">
-            <HelpCircle className="w-4 h-4 text-purple-400" />
+          <div className="w-8 h-8 rounded-xl bg-[#08261A] border border-amber-500/30 flex items-center justify-center text-amber-300 shrink-0">
+            <HelpCircle className="w-4 h-4 text-amber-400" />
           </div>
           <div>
-            <span className="text-xs font-bold text-white block">How Custom Blocking Works</span>
-            <span className="text-[10px] text-purple-300/70 font-metric">
+            <span className="text-xs font-bold text-amber-50 block">How Custom Blocking Works</span>
+            <span className="text-[10px] text-emerald-200/70 font-metric">
               Sandboxed simulation in browser • OS-level enforcement when packaged
             </span>
           </div>
@@ -415,7 +415,7 @@ export const CustomBlockModeView: React.FC = () => {
 
         <button
           onClick={() => setTechnicalNoteOpen(true)}
-          className="text-xs text-purple-300 hover:text-white font-semibold font-metric underline shrink-0"
+          className="text-xs text-amber-300 hover:text-white font-semibold font-metric underline shrink-0 cursor-pointer"
           type="button"
         >
           Learn More
@@ -423,14 +423,14 @@ export const CustomBlockModeView: React.FC = () => {
       </div>
 
       {/* Closing Ayah Anchor */}
-      <div className="p-5 rounded-2xl bg-[#120B20] border border-purple-900/40 text-center space-y-1.5">
-        <p className="font-arabic text-xl text-white font-bold leading-loose" dir="rtl">
+      <div className="p-5 rounded-2xl bg-[#061D14] border border-amber-500/35 text-center space-y-1.5">
+        <p className="font-arabic text-xl text-amber-50 font-bold leading-loose" dir="rtl">
           قُل لِّلْمُؤْمِنِينَ يَغُضُّوا مِنْ أَبْصَارِهِمْ وَيَحْفَظُوا فُرُوجَهُمْ
         </p>
-        <p className="text-xs text-purple-200 italic font-sans">
+        <p className="text-xs text-emerald-200 italic font-sans">
           “Tell the believing men to reduce [some] of their vision and guard their private parts.”
         </p>
-        <span className="text-[10px] text-purple-400/80 font-metric block">
+        <span className="text-[10px] text-amber-400 font-metric block">
           — Surah An-Nur (Quran 24:30)
         </span>
       </div>

@@ -26,7 +26,7 @@ export const NafsScoreView: React.FC = () => {
       ayah: 'Quran 75:2',
       desc: 'Aware of missteps, quick to repent, and continually resetting.',
       active: nafsInfo.score >= 70 && nafsInfo.score < 90,
-      color: 'purple',
+      color: 'emerald',
     },
     {
       range: '50–69',
@@ -36,7 +36,7 @@ export const NafsScoreView: React.FC = () => {
       ayah: 'Quran 29:69',
       desc: 'Active spiritual battlefield. Pushing back against habitual triggers.',
       active: nafsInfo.score >= 50 && nafsInfo.score < 70,
-      color: 'indigo',
+      color: 'teal',
     },
     {
       range: '30–49',
@@ -44,7 +44,7 @@ export const NafsScoreView: React.FC = () => {
       arabic: 'النَّفْسُ الأَمَّارَة',
       meaning: 'The Impulsive Soul',
       ayah: 'Quran 12:53',
-      desc: 'The soul inclined to impulse. You are in the arena right now, bhai — hold the line.',
+      desc: 'The soul inclined to impulse. You are in the arena right now, akhi — hold the line.',
       active: nafsInfo.score >= 30 && nafsInfo.score < 50,
       color: 'amber',
     },
@@ -69,16 +69,16 @@ export const NafsScoreView: React.FC = () => {
       {/* Title & Description */}
       <div>
         <div className="flex items-center gap-2">
-          <Brain className="w-5 h-5 text-purple-400" />
-          <h1 className="text-lg font-bold text-white">Nafs Score</h1>
+          <Brain className="w-5 h-5 text-amber-400" />
+          <h1 className="text-lg font-bold text-amber-50">Nafs Score</h1>
         </div>
-        <p className="text-xs text-purple-200/70 mt-0.5">
+        <p className="text-xs text-emerald-200/80 mt-0.5">
           Calculated dynamically from your focus windows, blocked temptations, and dhikr consistency.
         </p>
       </div>
 
       {/* Hero Circular Score Card */}
-      <div className="rounded-3xl bg-gradient-to-b from-[#1E1433] via-[#170F26] to-[#120B1F] border border-purple-800/40 p-6 flex flex-col items-center text-center shadow-xl relative overflow-hidden">
+      <div className="rounded-3xl bg-gradient-to-b from-[#0A3825] via-[#062417] to-[#04160E] border border-amber-500/35 p-6 flex flex-col items-center text-center shadow-xl relative overflow-hidden">
         <div className="absolute top-4 right-4 flex items-center gap-1 px-2.5 py-1 rounded-full bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-[10px] font-metric font-semibold">
           <TrendingUp className="w-3 h-3" />
           <span>+20 vs weekly avg</span>
@@ -88,7 +88,7 @@ export const NafsScoreView: React.FC = () => {
         <div className="relative w-36 h-36 flex items-center justify-center my-3">
           <svg className="w-full h-full -rotate-90" viewBox="0 0 140 140">
             <circle
-              className="text-[#2A1C44]"
+              className="text-[#0D3827]"
               cx="70"
               cy="70"
               fill="none"
@@ -97,7 +97,7 @@ export const NafsScoreView: React.FC = () => {
               strokeWidth="10"
             />
             <circle
-              className="text-purple-500 transition-all duration-700 ease-out"
+              className="text-emerald-500 transition-all duration-700 ease-out"
               cx="70"
               cy="70"
               fill="none"
@@ -108,7 +108,7 @@ export const NafsScoreView: React.FC = () => {
               strokeLinecap="round"
               strokeWidth="10"
               style={{
-                filter: 'drop-shadow(0 0 10px rgba(124, 58, 237, 0.7))',
+                filter: 'drop-shadow(0 0 10px rgba(16, 185, 129, 0.7))',
               }}
             />
           </svg>
@@ -116,33 +116,33 @@ export const NafsScoreView: React.FC = () => {
             <span className="font-metric text-4xl font-extrabold text-white leading-none">
               {nafsInfo.score}
             </span>
-            <span className="text-[11px] text-purple-300/70 font-metric mt-1">/ 100</span>
+            <span className="text-[11px] text-emerald-300/70 font-metric mt-1">/ 100</span>
           </div>
         </div>
 
         {/* Level Banner */}
-        <span className="text-[10px] uppercase font-metric tracking-widest text-purple-300/70 font-semibold mt-1">
+        <span className="text-[10px] uppercase font-metric tracking-widest text-emerald-200/70 font-semibold mt-1">
           Today's Nafs Level
         </span>
-        <h2 className="text-xl font-bold text-white mt-0.5">{nafsInfo.levelName}</h2>
+        <h2 className="text-xl font-bold text-amber-50 mt-0.5">{nafsInfo.levelName}</h2>
         <span className="font-arabic text-2xl text-amber-400 font-bold my-1">
           {nafsInfo.arabicName}
         </span>
-        <p className="text-xs text-purple-200/80 max-w-xs leading-relaxed mt-1">
+        <p className="text-xs text-emerald-100/90 max-w-xs leading-relaxed mt-1">
           {nafsInfo.description}
         </p>
 
         {/* Clean streak pill */}
-        <div className="mt-4 pt-3 border-t border-purple-900/30 w-full flex items-center justify-around text-center">
+        <div className="mt-4 pt-3 border-t border-amber-500/20 w-full flex items-center justify-around text-center">
           <div>
-            <span className="text-[10px] uppercase font-metric text-purple-300/60 block">
+            <span className="text-[10px] uppercase font-metric text-emerald-200/60 block">
               Clean Days
             </span>
             <span className="text-sm font-bold text-white font-metric">{currentStreak} day(s)</span>
           </div>
-          <div className="h-6 w-px bg-purple-900/40" />
+          <div className="h-6 w-px bg-amber-500/20" />
           <div>
-            <span className="text-[10px] uppercase font-metric text-purple-300/60 block">
+            <span className="text-[10px] uppercase font-metric text-emerald-200/60 block">
               Dhikr Sets
             </span>
             <span className="text-sm font-bold text-amber-300 font-metric">
@@ -153,38 +153,38 @@ export const NafsScoreView: React.FC = () => {
       </div>
 
       {/* Realtime Algorithm Breakdown */}
-      <div className="rounded-2xl bg-[#170F26] border border-purple-900/30 p-5 space-y-3">
+      <div className="rounded-2xl bg-[#061D14] border border-amber-500/25 p-5 space-y-3">
         <div className="flex items-center gap-2">
-          <Info className="w-4 h-4 text-purple-400" />
-          <h3 className="text-xs font-bold text-white uppercase font-metric tracking-wider">
+          <Info className="w-4 h-4 text-amber-400" />
+          <h3 className="text-xs font-bold text-amber-50 uppercase font-metric tracking-wider">
             Scoring Formula Breakdown
           </h3>
         </div>
 
         <div className="space-y-2 text-xs">
-          <div className="flex items-center justify-between py-1 border-b border-purple-950/60">
-            <span className="text-purple-200/80">Base Score</span>
+          <div className="flex items-center justify-between py-1 border-b border-amber-500/15">
+            <span className="text-emerald-200/80">Base Score</span>
             <span className="font-metric font-semibold text-white">100 pts</span>
           </div>
-          <div className="flex items-center justify-between py-1 border-b border-purple-950/60">
-            <span className="text-purple-200/80">
+          <div className="flex items-center justify-between py-1 border-b border-amber-500/15">
+            <span className="text-emerald-200/80">
               Blocked attempts penalty ({events.length} × -3)
             </span>
             <span className="font-metric font-semibold text-rose-400">
               -{events.length * 3} pts
             </span>
           </div>
-          <div className="flex items-center justify-between py-1 border-b border-purple-950/60">
-            <span className="text-purple-200/80">
+          <div className="flex items-center justify-between py-1 border-b border-amber-500/15">
+            <span className="text-emerald-200/80">
               Dhikr completed boost ({dhikrSessionsCompletedToday} × +4)
             </span>
             <span className="font-metric font-semibold text-emerald-400">
               +{dhikrSessionsCompletedToday * 4} pts
             </span>
           </div>
-          <div className="flex items-center justify-between py-1 border-b border-purple-950/60">
-            <span className="text-purple-200/80">Clean consistency factor</span>
-            <span className="font-metric font-semibold text-purple-300">
+          <div className="flex items-center justify-between py-1 border-b border-amber-500/15">
+            <span className="text-emerald-200/80">Clean consistency factor</span>
+            <span className="font-metric font-semibold text-amber-300">
               +{Math.min(14, currentStreak * 6)} pts
             </span>
           </div>
@@ -200,10 +200,10 @@ export const NafsScoreView: React.FC = () => {
       {/* Quranic Framework Tier List */}
       <div className="space-y-3">
         <div className="flex items-center justify-between px-1">
-          <span className="text-xs font-bold text-white uppercase font-metric tracking-wider">
+          <span className="text-xs font-bold text-amber-50 uppercase font-metric tracking-wider">
             Quranic Nafs Framework
           </span>
-          <span className="text-[10px] text-purple-300/70 font-metric">
+          <span className="text-[10px] text-emerald-200/70 font-metric">
             5 Stages of the Soul
           </span>
         </div>
@@ -214,14 +214,14 @@ export const NafsScoreView: React.FC = () => {
               key={idx}
               className={`p-4 rounded-2xl border transition-all ${
                 tier.active
-                  ? 'bg-[#221338] border-purple-500/60 shadow-[0_0_20px_rgba(124,58,237,0.2)] ring-1 ring-purple-500/30'
-                  : 'bg-[#170F26] border-purple-900/30 opacity-75'
+                  ? 'bg-[#08261A] border-amber-500/60 shadow-[0_0_20px_rgba(212,175,55,0.2)] ring-1 ring-amber-500/40'
+                  : 'bg-[#061D14] border-amber-500/25 opacity-75'
               }`}
             >
               <div className="flex items-center justify-between mb-1">
                 <div className="flex items-center gap-2">
                   <span className="text-xs font-bold text-white">{tier.name}</span>
-                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-purple-950 text-purple-300 font-metric">
+                  <span className="text-[10px] px-2 py-0.5 rounded-full bg-[#04160E] text-amber-300 font-metric border border-amber-500/30">
                     {tier.range}
                   </span>
                 </div>
@@ -230,11 +230,11 @@ export const NafsScoreView: React.FC = () => {
                 </span>
               </div>
 
-              <p className="text-xs text-purple-200/80 leading-relaxed mt-1">{tier.desc}</p>
+              <p className="text-xs text-emerald-100/80 leading-relaxed mt-1">{tier.desc}</p>
 
-              <div className="flex items-center justify-between mt-2 pt-2 border-t border-purple-900/30 text-[10px] text-purple-400 font-metric">
+              <div className="flex items-center justify-between mt-2 pt-2 border-t border-amber-500/20 text-[10px] text-emerald-300 font-metric">
                 <span>{tier.meaning}</span>
-                <span className="text-purple-300 font-semibold">{tier.ayah}</span>
+                <span className="text-amber-300 font-semibold">{tier.ayah}</span>
               </div>
             </div>
           ))}
@@ -242,17 +242,17 @@ export const NafsScoreView: React.FC = () => {
       </div>
 
       {/* Closing Ayah Card */}
-      <div className="p-5 rounded-2xl bg-[#170F26] border border-purple-900/40 text-center space-y-1.5">
+      <div className="p-5 rounded-2xl bg-[#061D14] border border-amber-500/35 text-center space-y-1.5">
         <span className="text-[10px] uppercase font-metric tracking-widest text-amber-300 font-bold">
           Spiritual Anchor
         </span>
-        <p className="font-arabic text-2xl text-white font-bold leading-loose" dir="rtl">
+        <p className="font-arabic text-2xl text-amber-50 font-bold leading-loose" dir="rtl">
           قَدْ أَفْلَحَ مَن زَكَّاهَا
         </p>
-        <p className="text-xs text-purple-200 italic font-sans">
+        <p className="text-xs text-emerald-200 italic font-sans">
           “He who purifies it [the nafs] will succeed.”
         </p>
-        <span className="text-[10px] text-purple-400/80 font-metric block">
+        <span className="text-[10px] text-amber-400 font-metric block">
           — Surah Ash-Shams (Quran 91:9)
         </span>
       </div>

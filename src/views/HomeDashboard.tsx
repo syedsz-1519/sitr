@@ -32,6 +32,7 @@ import {
   AlertTriangle,
   Volume2,
   VolumeX,
+  Wind,
 } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { useSitrStore } from '../store/useSitrStore';
@@ -67,6 +68,8 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
     currentStreak,
     recordCleanDay,
     customBlockModeEnabled,
+    setBreathPauseModalOpen,
+    breathPausesCompleted,
   } = useSitrStore();
 
   const {
@@ -88,7 +91,6 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
   const [isCopied, setIsCopied] = useState(false);
   const [isShared, setIsShared] = useState(false);
   const [isPressingDhikr, setIsPressingDhikr] = useState(false);
-  const [showReflectionLesson, setShowReflectionLesson] = useState(true);
   const [streakGlowActive, setStreakGlowActive] = useState(false);
   const [isAmbientPlaying, setIsAmbientPlaying] = useState(false);
 
@@ -196,7 +198,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
         particleCount: 50,
         spread: 60,
         origin: { y: 0.7 },
-        colors: ['#A78BFA', '#F59E0B', '#10B981', '#DDD6FE'],
+        colors: ['#D4AF37', '#10B981', '#059669', '#FDE68A', '#34D399'],
       });
     }
   };
@@ -259,8 +261,8 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
       default:
         return {
           label: activeAyah.themeLabel || 'Quranic Anchor',
-          icon: <Compass className="w-3 h-3 text-purple-400" />,
-          color: 'bg-purple-950/60 border-purple-800/40 text-purple-300',
+          icon: <Compass className="w-3 h-3 text-amber-400" />,
+          color: 'bg-[#061D14] border-amber-500/30 text-amber-300',
         };
     }
   };
@@ -273,10 +275,10 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 px-0.5">
         <div className="flex items-center gap-2">
           <span className="relative flex h-2.5 w-2.5">
-            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-emerald-500"></span>
+            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+            <span className="relative inline-flex rounded-full h-2.5 w-2.5 bg-amber-500"></span>
           </span>
-          <span className="text-[11px] font-metric uppercase tracking-widest text-purple-200/90 font-bold">
+          <span className="text-[11px] font-metric uppercase tracking-widest text-amber-300/90 font-bold">
             Sanctuary Overview
           </span>
         </div>
@@ -284,14 +286,14 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
       </div>
 
       {/* 1. HERO: PROMINENT ARMED GUARDIAN STATUS HUB */}
-      <div className="relative rounded-3xl bg-gradient-to-b from-[#1C1033] via-[#140A28] to-[#0D061A] border border-purple-700/40 p-5 sm:p-6 shadow-[0_10px_35px_rgba(124,58,237,0.18)] overflow-hidden">
+      <div className="relative rounded-3xl bg-gradient-to-b from-[#0D3827] via-[#07251A] to-[#04140E] border border-amber-500/35 p-5 sm:p-6 shadow-[0_10px_35px_rgba(4,20,14,0.6)] overflow-hidden">
         {/* Ambient atmospheric glows */}
         <div
           className={`absolute -top-12 -right-12 w-48 h-48 rounded-full blur-3xl pointer-events-none transition-colors duration-700 ${
-            isArmed ? 'bg-emerald-500/15' : 'bg-rose-500/10'
+            isArmed ? 'bg-emerald-500/20' : 'bg-rose-500/15'
           }`}
         />
-        <div className="absolute -bottom-12 -left-12 w-40 h-40 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-12 -left-12 w-40 h-40 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
         {/* Main Status Row */}
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 relative z-10">
@@ -301,27 +303,27 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
               <div
                 className={`w-14 h-14 rounded-2xl flex items-center justify-center border transition-all duration-500 ${
                   isArmed
-                    ? 'bg-emerald-950/80 border-emerald-500/50 text-emerald-400 shadow-[0_0_25px_rgba(16,185,129,0.35)]'
+                    ? 'bg-[#041A12] border-emerald-400/50 text-emerald-400 shadow-[0_0_25px_rgba(16,185,129,0.35)]'
                     : 'bg-zinc-900 border-zinc-700/50 text-zinc-500'
                 }`}
               >
                 {isArmed ? (
-                  <ShieldCheck className="w-7 h-7 animate-pulse" />
+                  <ShieldCheck className="w-7 h-7 animate-pulse text-emerald-400" />
                 ) : (
                   <ShieldAlert className="w-7 h-7" />
                 )}
               </div>
               {isArmed && (
                 <span className="absolute -top-1 -right-1 flex h-3.5 w-3.5">
-                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
-                  <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-emerald-500"></span>
+                  <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-amber-400 opacity-75"></span>
+                  <span className="relative inline-flex rounded-full h-3.5 w-3.5 bg-amber-500"></span>
                 </span>
               )}
             </div>
 
             <div>
               <div className="flex items-center gap-2">
-                <h1 className="text-base sm:text-lg font-black tracking-wide text-white font-metric">
+                <h1 className="text-base sm:text-lg font-black tracking-wide text-amber-50 font-metric">
                   {isArmed ? 'SHIELD GUARDIAN ARMED' : 'SHIELD GUARDIAN PAUSED'}
                 </h1>
                 <span
@@ -334,7 +336,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
                   {isArmed ? 'PROTECTING' : 'DISARMED'}
                 </span>
               </div>
-              <p className="text-xs text-purple-200/80 mt-0.5 leading-relaxed">
+              <p className="text-xs text-emerald-200/80 mt-0.5 leading-relaxed">
                 {isArmed
                   ? 'Real-time Nafs shield active • Guarding gaze, screen & heart'
                   : 'Protection is off — tap to arm SITR against visual triggers'}
@@ -349,7 +351,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
             className={`w-full sm:w-auto px-5 py-2.5 rounded-2xl font-metric font-bold text-xs uppercase tracking-wider transition-all flex items-center justify-center gap-2 shrink-0 shadow-lg active:scale-95 ${
               isArmed
                 ? 'bg-gradient-to-r from-emerald-600 to-teal-600 text-white shadow-emerald-950/60 hover:brightness-110 border border-emerald-400/40'
-                : 'bg-gradient-to-r from-purple-700 to-indigo-700 text-white shadow-purple-950/60 hover:brightness-110 border border-purple-400/40'
+                : 'bg-gradient-to-r from-amber-500 to-amber-600 text-black font-extrabold shadow-amber-950/60 hover:brightness-110 border border-amber-400/50'
             }`}
           >
             {isArmed ? (
@@ -367,21 +369,21 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
         </div>
 
         {/* Status Metrics Bar */}
-        <div className="grid grid-cols-3 gap-2.5 mt-5 pt-4 border-t border-purple-900/40 relative z-10">
-          <div className="bg-[#120822]/80 border border-purple-900/30 rounded-xl p-2.5 text-center">
-            <span className="font-metric text-lg sm:text-xl font-extrabold text-white leading-none block">
+        <div className="grid grid-cols-3 gap-2.5 mt-5 pt-4 border-t border-amber-500/20 relative z-10">
+          <div className="bg-[#061D14] border border-amber-500/20 rounded-xl p-2.5 text-center">
+            <span className="font-metric text-lg sm:text-xl font-extrabold text-amber-50 leading-none block">
               {rules.filter((r) => r.enabled).length}
             </span>
-            <span className="text-[10px] uppercase tracking-wider text-purple-300/70 font-metric mt-1 block">
+            <span className="text-[10px] uppercase tracking-wider text-emerald-300/80 font-metric mt-1 block">
               Active Rules
             </span>
           </div>
 
-          <div className="bg-[#120822]/80 border border-purple-900/30 rounded-xl p-2.5 text-center">
+          <div className="bg-[#061D14] border border-amber-500/20 rounded-xl p-2.5 text-center">
             <span className="font-metric text-lg sm:text-xl font-extrabold text-amber-400 leading-none block">
               {events.length}
             </span>
-            <span className="text-[10px] uppercase tracking-wider text-purple-300/70 font-metric mt-1 block">
+            <span className="text-[10px] uppercase tracking-wider text-emerald-300/80 font-metric mt-1 block">
               Blocks Today
             </span>
           </div>
@@ -390,10 +392,10 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
             onClick={handleRecordCleanDay}
             type="button"
             title="Click to record clean day / celebrate streak milestone"
-            className={`bg-[#120822]/90 border rounded-xl p-2.5 text-center transition-all active:scale-95 group relative overflow-hidden cursor-pointer ${
+            className={`bg-[#061D14] border rounded-xl p-2.5 text-center transition-all active:scale-95 group relative overflow-hidden cursor-pointer ${
               streakGlowActive || isStreakMilestone
-                ? 'border-emerald-500/60 shadow-[0_0_16px_rgba(52,211,153,0.25)]'
-                : 'border-purple-900/30 hover:border-purple-700/50'
+                ? 'border-emerald-400/60 shadow-[0_0_16px_rgba(52,211,153,0.25)]'
+                : 'border-amber-500/20 hover:border-amber-500/50'
             }`}
           >
             {/* Ambient glow backdrop during animation or milestone */}
@@ -407,8 +409,8 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
                   streakGlowActive
                     ? 'animate-taqwa-pulse-trigger text-emerald-300'
                     : isStreakMilestone
-                    ? 'animate-taqwa-glow text-emerald-400'
-                    : 'text-emerald-400'
+                    ? 'animate-taqwa-glow text-amber-300'
+                    : 'text-amber-400'
                 }`}
               >
                 {currentStreak}d
@@ -418,27 +420,27 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
               )}
             </div>
 
-            <span className="text-[10px] uppercase tracking-wider text-purple-300/70 font-metric mt-1 block">
+            <span className="text-[10px] uppercase tracking-wider text-emerald-300/80 font-metric mt-1 block">
               Taqwa Streak
             </span>
-            <span className="text-[8px] font-metric text-emerald-400/80 group-hover:text-emerald-300 block transition-colors">
+            <span className="text-[8px] font-metric text-amber-400/90 group-hover:text-amber-300 block transition-colors">
               + Clean Day
             </span>
           </button>
         </div>
 
         {/* Quick Test Intercept Trigger */}
-        <div className="mt-3 flex items-center justify-between bg-[#190E2E]/60 border border-purple-800/30 rounded-xl px-3.5 py-2 text-xs">
-          <div className="flex items-center gap-2 text-purple-200/90">
+        <div className="mt-3 flex items-center justify-between bg-[#061D14] border border-amber-500/20 rounded-xl px-3.5 py-2 text-xs">
+          <div className="flex items-center gap-2 text-emerald-200/90">
             <Sparkles className="w-3.5 h-3.5 text-amber-400" />
             <span className="text-[11px]">Experience how SITR halts temptation</span>
           </div>
           <button
             onClick={() => simulateBlockPrompt()}
             type="button"
-            className="text-[10px] font-metric font-bold uppercase tracking-wider text-purple-300 hover:text-white bg-purple-900/60 hover:bg-purple-800/80 px-2.5 py-1 rounded-lg border border-purple-700/40 transition-colors flex items-center gap-1.5"
+            className="text-[10px] font-metric font-bold uppercase tracking-wider text-amber-300 hover:text-black bg-[#0A2E20] hover:bg-amber-400 px-2.5 py-1 rounded-lg border border-amber-500/40 transition-colors flex items-center gap-1.5 cursor-pointer"
           >
-            <Play className="w-3 h-3 fill-purple-300" />
+            <Play className="w-3 h-3 fill-amber-300" />
             <span>Test Intercept</span>
           </button>
         </div>
@@ -447,7 +449,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
       {/* 2. URGENT RESCUE ACTION BUTTON */}
       <button
         onClick={() => setUrgentRescueOpen(true, 'Self-reported urge check-in')}
-        className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-rose-950/70 via-purple-950/60 to-rose-950/70 border border-rose-600/40 text-rose-200 hover:text-white flex items-center justify-between shadow-[0_4px_25px_rgba(225,29,72,0.18)] active:scale-98 transition-all group cursor-pointer"
+        className="w-full py-3.5 px-4 rounded-2xl bg-gradient-to-r from-rose-950/80 via-[#1A0B12] to-rose-950/80 border border-rose-500/40 text-rose-200 hover:text-white flex items-center justify-between shadow-[0_4px_25px_rgba(225,29,72,0.18)] active:scale-98 transition-all group cursor-pointer"
         type="button"
       >
         <div className="flex items-center gap-3">
@@ -471,10 +473,41 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
       {/* 2.5 DAILY REFLECTION & EVENING MUHASABAH CARD */}
       <DailyReflectionCard onNavigate={onNavigate} />
 
+      {/* 2.7 30-SECOND DHIKR BREATH PAUSE ANIMATION HERO */}
+      <div className="rounded-2xl bg-gradient-to-r from-[#07251A] via-[#0B3322] to-[#051A11] border border-amber-500/35 p-4 flex flex-col sm:flex-row items-center justify-between gap-3.5 shadow-lg relative overflow-hidden">
+        <div className="flex items-center gap-3 w-full sm:w-auto">
+          <div className="w-10 h-10 rounded-xl bg-amber-500/20 border border-amber-500/40 flex items-center justify-center text-amber-300 shrink-0 shadow-inner">
+            <Wind className="w-5 h-5 animate-pulse text-amber-300" />
+          </div>
+          <div>
+            <div className="flex items-center gap-2">
+              <span className="text-xs font-bold text-amber-50 uppercase tracking-wider font-metric">
+                Dhikr Breath Pause
+              </span>
+              <span className="text-[9px] font-metric font-bold px-2 py-0.5 rounded-full bg-amber-500/15 text-amber-300 border border-amber-500/30">
+                30 SECONDS
+              </span>
+            </div>
+            <p className="text-[11px] text-emerald-200/80 leading-tight mt-0.5">
+              Guided 30-second breathing with sacred Dhikr phrases to halt dopamine cravings
+            </p>
+          </div>
+        </div>
+
+        <button
+          type="button"
+          onClick={() => setBreathPauseModalOpen(true)}
+          className="w-full sm:w-auto py-2.5 px-4 rounded-xl bg-gradient-to-r from-amber-500 to-emerald-600 hover:from-amber-400 hover:to-emerald-500 text-black font-metric font-bold text-xs uppercase tracking-wider flex items-center justify-center gap-2 shadow-md transition-all cursor-pointer whitespace-nowrap"
+        >
+          <Play className="w-3.5 h-3.5 fill-black" />
+          <span>Launch 30s Pause</span>
+        </button>
+      </div>
+
       {/* 3. INTERACTIVE DHIKR INTERRUPT CARD WITH PROGRESS ANIMATIONS */}
-      <div className="rounded-3xl bg-gradient-to-b from-[#1C1033] via-[#150B27] to-[#0E061B] border border-purple-800/40 p-5 sm:p-6 shadow-xl relative overflow-hidden">
+      <div className="rounded-3xl bg-gradient-to-b from-[#0D3827] via-[#082318] to-[#04140E] border border-amber-500/35 p-5 sm:p-6 shadow-xl relative overflow-hidden">
         {/* Glow ambient */}
-        <div className="absolute top-0 right-0 w-44 h-44 bg-purple-600/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-0 right-0 w-44 h-44 bg-emerald-600/10 rounded-full blur-3xl pointer-events-none" />
         <div className="absolute bottom-0 left-0 w-36 h-36 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
         {/* Card Header */}
@@ -486,12 +519,22 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
                 Dhikr Sakinah Interrupt
               </span>
             </div>
-            <p className="text-xs text-purple-200/70 mt-0.5">
+            <p className="text-xs text-emerald-200/80 mt-0.5">
               Break the dopamine impulse — replace visual cravings with Allah's remembrance.
             </p>
           </div>
 
           <div className="flex items-center gap-1.5">
+            {/* Quick 30s Breath Pause button */}
+            <button
+              onClick={() => setBreathPauseModalOpen(true)}
+              type="button"
+              title="Open 30s Dhikr Breath Pause"
+              className="px-2 py-1 rounded-xl border border-amber-500/30 bg-[#061D14] hover:bg-amber-500/20 text-amber-300 transition-all text-[10px] font-metric font-semibold flex items-center gap-1 cursor-pointer"
+            >
+              <Wind className="w-3.5 h-3.5" />
+              <span className="hidden xs:inline">30s Breath</span>
+            </button>
             {/* Ambient Chant Loop Quick Toggle */}
             <button
               onClick={handleToggleAmbient}
@@ -500,7 +543,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
               className={`px-2 py-1 rounded-xl border flex items-center gap-1.5 transition-all text-[10px] font-metric font-semibold ${
                 isAmbientPlaying
                   ? 'bg-amber-500/20 border-amber-400/60 text-amber-300 shadow-[0_0_12px_rgba(245,158,11,0.3)]'
-                  : 'bg-[#100820] border-purple-900/50 text-purple-300/70 hover:text-white'
+                  : 'bg-[#061D14] border-amber-500/25 text-emerald-200/70 hover:text-white'
               }`}
             >
               {isAmbientPlaying ? (
@@ -517,7 +560,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
             </button>
 
             {/* Target Selector */}
-            <div className="flex items-center gap-1 bg-[#100820] border border-purple-900/50 p-1 rounded-xl">
+            <div className="flex items-center gap-1 bg-[#061D14] border border-amber-500/25 p-1 rounded-xl">
               {[11, 33, 99].map((t) => (
                 <button
                   key={t}
@@ -525,8 +568,8 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
                   type="button"
                   className={`px-2 py-0.5 rounded-lg text-[10px] font-metric font-bold transition-all ${
                     dhikrTarget === t
-                      ? 'bg-purple-600 text-white shadow-sm'
-                      : 'text-purple-300/60 hover:text-purple-200'
+                      ? 'bg-emerald-600 text-amber-50 shadow-sm'
+                      : 'text-emerald-300/70 hover:text-amber-200'
                   }`}
                 >
                   {t}x
@@ -545,8 +588,8 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
               type="button"
               className={`px-2.5 py-1.5 rounded-xl text-xs font-semibold font-metric transition-all text-left flex flex-col ${
                 selectedDhikrType === d.id
-                  ? 'bg-purple-900/70 border border-purple-500/60 text-white shadow-sm'
-                  : 'bg-[#120822] border border-purple-900/30 text-purple-300/60 hover:text-purple-200'
+                  ? 'bg-[#0B3824] border border-amber-500/60 text-amber-200 shadow-sm'
+                  : 'bg-[#061D14] border border-amber-500/20 text-emerald-200/70 hover:text-amber-100'
               }`}
             >
               <span className="font-bold truncate">{d.label}</span>
@@ -558,13 +601,13 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
         {/* Active Dhikr Display */}
         <div className="text-center relative z-10 mb-4">
           <p
-            className="font-arabic text-2xl sm:text-3xl text-white my-1 leading-relaxed font-bold tracking-wide select-none drop-shadow-sm"
+            className="font-arabic text-2xl sm:text-3xl text-amber-200 my-1 leading-relaxed font-bold tracking-wide select-none drop-shadow-[0_0_10px_rgba(212,175,55,0.3)]"
             dir="rtl"
           >
             {activeDhikr.arabic}
           </p>
-          <p className="text-xs text-purple-200/90 font-medium">
-            <span className="text-purple-300 font-semibold">{activeDhikr.transliteration}</span>
+          <p className="text-xs text-emerald-200/90 font-medium">
+            <span className="text-amber-300 font-semibold">{activeDhikr.transliteration}</span>
             <span className="mx-2 opacity-50">•</span>
             <span className="italic">"{activeDhikr.meaning}"</span>
           </p>
@@ -576,7 +619,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
             onClick={handleTapDhikr}
             aria-label="Tap to increment Dhikr"
             type="button"
-            className={`relative rounded-full flex flex-col items-center justify-center bg-gradient-to-br from-[#241344] to-[#160A2D] shadow-[0_0_30px_rgba(124,58,237,0.3)] transition-transform duration-100 focus:outline-none cursor-pointer group select-none w-44 h-44 ${
+            className={`relative rounded-full flex flex-col items-center justify-center bg-gradient-to-br from-[#0D3827] via-[#08261A] to-[#04160E] border border-amber-500/40 shadow-[0_0_30px_rgba(212,175,55,0.25)] transition-transform duration-100 focus:outline-none cursor-pointer group select-none w-44 h-44 ${
               isPressingDhikr ? 'scale-95' : 'active:scale-95'
             }`}
           >
@@ -587,7 +630,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
             >
               {/* Background Track */}
               <circle
-                className="text-[#2B1750]"
+                className="text-[#051F14]"
                 cx="80"
                 cy="80"
                 fill="none"
@@ -598,7 +641,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
               {/* Dynamic Fill Arc */}
               <circle
                 className={`transition-all duration-200 ${
-                  isDhikrComplete ? 'text-amber-400' : 'text-purple-500'
+                  isDhikrComplete ? 'text-amber-300' : 'text-emerald-400'
                 }`}
                 cx="80"
                 cy="80"
@@ -613,10 +656,10 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
             </svg>
 
             {/* Inner Content */}
-            <span className="font-metric text-4xl sm:text-5xl font-extrabold text-white tracking-tight leading-none">
+            <span className="font-metric text-4xl sm:text-5xl font-extrabold text-amber-50 tracking-tight leading-none">
               {dhikrCount}
             </span>
-            <span className="text-[11px] font-metric text-purple-300/70 font-semibold mt-1">
+            <span className="text-[11px] font-metric text-emerald-300/80 font-semibold mt-1">
               target: {dhikrTarget}
             </span>
             <span className="text-[10px] text-amber-300 font-metric uppercase tracking-wider font-bold mt-1">
@@ -626,7 +669,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
 
           {/* Remaining Taps Feedback */}
           <div className="mt-3 flex items-center justify-center gap-3">
-            <span className="text-xs text-purple-200/80 font-metric">
+            <span className="text-xs text-emerald-200/90 font-metric">
               {isDhikrComplete ? (
                 <span className="text-amber-300 font-bold flex items-center gap-1">
                   <CheckCircle2 className="w-4 h-4 text-amber-400 inline" />
@@ -634,7 +677,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
                 </span>
               ) : (
                 <span>
-                  <strong>{dhikrRemaining}</strong> taps remaining to complete cycle
+                  <strong className="text-amber-300">{dhikrRemaining}</strong> taps remaining to complete cycle
                 </span>
               )}
             </span>
@@ -642,7 +685,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
               onClick={resetDhikr}
               type="button"
               title="Reset Misbaha Counter"
-              className="text-[11px] text-purple-400 hover:text-white flex items-center gap-1 font-metric transition-colors"
+              className="text-[11px] text-emerald-300 hover:text-amber-300 flex items-center gap-1 font-metric transition-colors cursor-pointer"
             >
               <RefreshCw className="w-3 h-3" />
               <span>Reset</span>
@@ -651,16 +694,16 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
         </div>
 
         {/* Progress Bar */}
-        <div className="mt-4 pt-3 border-t border-purple-900/40 flex items-center justify-between text-[11px] text-purple-300/70 font-metric relative z-10">
+        <div className="mt-4 pt-3 border-t border-amber-500/20 flex items-center justify-between text-[11px] text-emerald-300/80 font-metric relative z-10">
           <span>Loop Interrupt Progress</span>
-          <span className="text-white font-bold">{Math.round(progressRatio * 100)}%</span>
+          <span className="text-amber-200 font-bold">{Math.round(progressRatio * 100)}%</span>
         </div>
-        <div className="w-full h-2 bg-[#120822] rounded-full overflow-hidden mt-1 relative z-10">
+        <div className="w-full h-2 bg-[#061D14] rounded-full overflow-hidden mt-1 relative z-10 border border-amber-500/10">
           <div
             className={`h-full transition-all duration-300 rounded-full ${
               isDhikrComplete
-                ? 'bg-gradient-to-r from-amber-400 to-yellow-300'
-                : 'bg-gradient-to-r from-purple-600 to-indigo-500'
+                ? 'bg-gradient-to-r from-amber-400 to-amber-300'
+                : 'bg-gradient-to-r from-emerald-500 to-teal-400'
             }`}
             style={{ width: `${progressRatio * 100}%` }}
           />
@@ -668,22 +711,22 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
       </div>
 
       {/* 4. ROTATING QURANIC AYAH CARD (SOURCED DIRECTLY FROM ayahs.json & TIME-OF-DAY HOOK) */}
-      <div className="rounded-3xl bg-gradient-to-b from-[#1F1435] via-[#160D27] to-[#0F071B] border border-purple-700/40 p-5 sm:p-6 shadow-xl relative overflow-hidden">
+      <div className="rounded-3xl bg-gradient-to-b from-[#0D3827] via-[#082318] to-[#04140E] border border-amber-500/35 p-5 sm:p-6 shadow-xl relative overflow-hidden">
         {/* Glow */}
         <div className="absolute top-0 right-0 w-44 h-44 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
         {/* Time-of-Day Spiritual Guidance Banner */}
-        <div className="mb-4 bg-[#130824]/90 border border-purple-800/40 rounded-2xl p-3 relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
+        <div className="mb-4 bg-[#061D14] border border-amber-500/25 rounded-2xl p-3 relative z-10 flex flex-col sm:flex-row sm:items-center justify-between gap-2.5">
           <div className="flex items-start sm:items-center gap-2.5">
-            <span className="text-xl p-1.5 rounded-xl bg-[#221040] border border-purple-700/50 shrink-0">
+            <span className="text-xl p-1.5 rounded-xl bg-[#0B3322] border border-amber-500/30 shrink-0">
               {timePeriod.icon}
             </span>
             <div>
               <div className="flex items-center gap-2 flex-wrap">
-                <span className="text-xs font-bold text-white font-metric">
+                <span className="text-xs font-bold text-amber-50 font-metric">
                   {timePeriod.slotLabel}
                 </span>
-                <span className="text-[10px] text-purple-300/70 font-metric font-mono px-1.5 py-0.2 rounded bg-purple-950/80 border border-purple-800/40">
+                <span className="text-[10px] text-amber-300/80 font-metric font-mono px-1.5 py-0.2 rounded bg-[#04140E] border border-amber-500/20">
                   {timePeriod.timeRange}
                 </span>
                 {timePeriod.isHighRiskWindow && (
@@ -693,7 +736,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
                   </span>
                 )}
               </div>
-              <p className="text-[11px] text-purple-200/80 mt-0.5 leading-snug">
+              <p className="text-[11px] text-emerald-200/80 mt-0.5 leading-snug">
                 {timePeriod.spiritualNote}
               </p>
             </div>
@@ -707,13 +750,13 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
               title={isAutoRotating ? 'Pause auto-rotation (every 45s)' : 'Resume auto-rotation'}
               className={`px-2 py-1 rounded-lg text-[10px] font-metric font-bold uppercase tracking-wider flex items-center gap-1 transition-all border ${
                 isAutoRotating
-                  ? 'bg-purple-900/60 border-purple-600/50 text-purple-200'
+                  ? 'bg-[#0B3824] border-amber-500/50 text-amber-200'
                   : 'bg-zinc-900/80 border-zinc-700 text-zinc-400'
               }`}
             >
               {isAutoRotating ? (
                 <>
-                  <Pause className="w-2.5 h-2.5 fill-purple-300 text-purple-300" />
+                  <Pause className="w-2.5 h-2.5 fill-amber-300 text-amber-300" />
                   <span>Auto</span>
                 </>
               ) : (
@@ -729,7 +772,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
               onClick={resetToCurrentTimePeriod}
               type="button"
               title="Reset to current time-of-day anchor"
-              className="p-1.5 rounded-lg bg-purple-900/40 hover:bg-purple-800/60 border border-purple-700/40 text-purple-300 hover:text-white transition-colors"
+              className="p-1.5 rounded-lg bg-[#061D14] hover:bg-[#0B3322] border border-amber-500/30 text-amber-300 hover:text-white transition-colors"
             >
               <RotateCcw className="w-3.5 h-3.5" />
             </button>
@@ -739,7 +782,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
               onClick={handleRandomAyah}
               type="button"
               title="Random Ayah from pool"
-              className="p-1.5 rounded-lg bg-purple-900/40 hover:bg-purple-800/60 border border-purple-700/40 text-purple-300 hover:text-white transition-colors"
+              className="p-1.5 rounded-lg bg-[#061D14] hover:bg-[#0B3322] border border-amber-500/30 text-amber-300 hover:text-white transition-colors"
             >
               <Shuffle className="w-3.5 h-3.5" />
             </button>
@@ -755,7 +798,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
               {themeBadge.icon}
               <span>{themeBadge.label}</span>
             </span>
-            <span className="text-[10px] text-purple-300/60 font-metric font-semibold">
+            <span className="text-[10px] text-emerald-300/70 font-metric font-semibold">
               Verse {currentAyahIndex + 1} of {totalAyahs}
             </span>
           </div>
@@ -765,7 +808,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
               onClick={handlePrevAyah}
               type="button"
               title="Previous Ayah"
-              className="w-7 h-7 rounded-full bg-purple-900/40 hover:bg-purple-800/60 text-purple-300 hover:text-white flex items-center justify-center transition-colors"
+              className="w-7 h-7 rounded-full bg-[#061D14] hover:bg-[#0B3322] border border-amber-500/30 text-amber-300 hover:text-white flex items-center justify-center transition-colors"
             >
               <ChevronLeft className="w-4 h-4" />
             </button>
@@ -773,7 +816,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
               onClick={handleNextAyah}
               type="button"
               title="Next Ayah"
-              className="w-7 h-7 rounded-full bg-purple-900/40 hover:bg-purple-800/60 text-purple-300 hover:text-white flex items-center justify-center transition-colors"
+              className="w-7 h-7 rounded-full bg-[#061D14] hover:bg-[#0B3322] border border-amber-500/30 text-amber-300 hover:text-white flex items-center justify-center transition-colors"
             >
               <ChevronRight className="w-4 h-4" />
             </button>
@@ -781,7 +824,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
               onClick={handleCopyAyah}
               type="button"
               title="Copy Ayah"
-              className="w-7 h-7 rounded-full bg-purple-900/40 hover:bg-purple-800/60 text-purple-300 hover:text-white flex items-center justify-center transition-colors"
+              className="w-7 h-7 rounded-full bg-[#061D14] hover:bg-[#0B3322] border border-amber-500/30 text-amber-300 hover:text-white flex items-center justify-center transition-colors"
             >
               {isCopied ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Copy className="w-3.5 h-3.5" />}
             </button>
@@ -789,7 +832,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
               onClick={handleShareAyah}
               type="button"
               title="Share Ayah (Web Share API)"
-              className="w-7 h-7 rounded-full bg-purple-900/40 hover:bg-purple-800/60 text-purple-300 hover:text-white flex items-center justify-center transition-colors"
+              className="w-7 h-7 rounded-full bg-[#061D14] hover:bg-[#0B3322] border border-amber-500/30 text-amber-300 hover:text-white flex items-center justify-center transition-colors"
             >
               {isShared ? <Check className="w-3.5 h-3.5 text-emerald-400" /> : <Share2 className="w-3.5 h-3.5" />}
             </button>
@@ -798,7 +841,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
 
         {/* Arabic Calligraphy */}
         <p
-          className="font-arabic text-2xl sm:text-3xl text-white my-3 text-right leading-loose font-bold tracking-wide select-none drop-shadow-md relative z-10"
+          className="font-arabic text-2xl sm:text-3xl text-amber-100 my-3 text-right leading-loose font-bold tracking-wide select-none drop-shadow-[0_0_10px_rgba(212,175,55,0.3)] relative z-10"
           dir="rtl"
         >
           {activeAyah.arabic}
@@ -806,49 +849,38 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
 
         {/* Transliteration */}
         {activeAyah.transliteration && (
-          <p className="text-xs text-purple-300/70 font-mono italic mb-2 relative z-10 leading-relaxed">
+          <p className="text-xs text-emerald-300/80 font-mono italic mb-2 relative z-10 leading-relaxed">
             {activeAyah.transliteration}
           </p>
         )}
 
         {/* English Translation */}
-        <p className="text-sm italic text-purple-100/95 leading-relaxed font-sans mb-3 relative z-10">
+        <p className="text-sm italic text-amber-50/95 leading-relaxed font-sans mb-3 relative z-10">
           "{activeAyah.translation}"
         </p>
 
         {/* Reference Bar */}
-        <div className="flex items-center justify-between pt-3 border-t border-purple-900/40 text-xs text-purple-300 font-metric relative z-10">
+        <div className="flex items-center justify-between pt-3 border-t border-amber-500/20 text-xs text-emerald-200/90 font-metric relative z-10">
           <span className="font-bold text-amber-300 flex items-center gap-1.5">
             <BookOpen className="w-3.5 h-3.5 text-amber-400" />
             {activeAyah.reference}
           </span>
           {activeAyah.surahName || activeAyah.surah ? (
-            <span>Surah {activeAyah.surahName || activeAyah.surah}</span>
+            <span className="text-emerald-300/80">Surah {activeAyah.surahName || activeAyah.surah}</span>
           ) : null}
         </div>
 
         {/* Nafs Antidote & Spiritual Lesson */}
         {activeAyah.reflectionLesson && (
-          <div className="mt-3 pt-3 border-t border-purple-900/30 relative z-10">
-            <div className="rounded-2xl bg-[#120822]/80 border border-purple-800/40 p-3.5">
-              <div className="flex items-center justify-between mb-1">
-                <span className="text-[10px] uppercase font-metric font-bold text-amber-400 tracking-wider flex items-center gap-1.5">
-                  <Sparkles className="w-3 h-3" />
-                  Nafs Antidote & Lesson
-                </span>
-                <button
-                  onClick={() => setShowReflectionLesson((prev) => !prev)}
-                  type="button"
-                  className="text-[10px] text-purple-400 hover:text-purple-200 font-metric"
-                >
-                  {showReflectionLesson ? 'Hide' : 'Show'}
-                </button>
-              </div>
-              {showReflectionLesson && (
-                <p className="text-xs text-purple-200/90 leading-relaxed font-sans">
-                  {activeAyah.reflectionLesson}
-                </p>
-              )}
+          <div className="mt-3 pt-3 border-t border-amber-500/20 relative z-10">
+            <div className="rounded-2xl bg-[#061D14] border border-amber-500/25 p-3.5 space-y-1.5">
+              <span className="text-[10px] uppercase font-metric font-bold text-amber-400 tracking-wider flex items-center gap-1.5">
+                <Sparkles className="w-3 h-3" />
+                Nafs Antidote & Lesson
+              </span>
+              <p className="text-xs text-emerald-100/90 leading-relaxed font-sans">
+                {activeAyah.reflectionLesson}
+              </p>
             </div>
           </div>
         )}
@@ -858,7 +890,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
           <button
             onClick={() => onNavigate && onNavigate('ayah_reflections')}
             type="button"
-            className="text-xs font-metric font-bold text-purple-300 hover:text-white flex items-center justify-end gap-1 ml-auto transition-colors group"
+            className="text-xs font-metric font-bold text-amber-300 hover:text-white flex items-center justify-end gap-1 ml-auto transition-colors group cursor-pointer"
           >
             <span>Explore all 40 Curated Ayahs in Sanctuary</span>
             <ArrowRight className="w-3.5 h-3.5 group-hover:translate-x-1 transition-transform" />
@@ -869,57 +901,57 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
       {/* 5. CUSTOM BLOCK MODE ACCESS BANNER */}
       <div
         onClick={() => onNavigate && onNavigate('custom_block_mode')}
-        className="rounded-2xl bg-gradient-to-r from-[#1C1133] via-[#160E2A] to-[#120921] border border-purple-800/40 hover:border-purple-600/60 p-4 flex items-center justify-between cursor-pointer transition-all shadow-md group select-none"
+        className="rounded-2xl bg-gradient-to-r from-[#0D3827] via-[#082318] to-[#04140E] border border-amber-500/35 hover:border-amber-400/60 p-4 flex items-center justify-between cursor-pointer transition-all shadow-md group select-none"
       >
         <div className="flex items-center gap-3">
-          <div className="w-10 h-10 rounded-xl bg-[#251540] border border-purple-600/40 flex items-center justify-center text-purple-300 group-hover:scale-105 transition-transform shrink-0">
-            <Shield className="w-5 h-5 fill-purple-400/20 text-purple-400" />
+          <div className="w-10 h-10 rounded-xl bg-[#061D14] border border-amber-500/40 flex items-center justify-center text-amber-300 group-hover:scale-105 transition-transform shrink-0">
+            <Shield className="w-5 h-5 fill-emerald-500/20 text-amber-400" />
           </div>
           <div>
             <div className="flex items-center gap-2">
-              <span className="text-xs font-bold text-white">Custom Block Mode</span>
+              <span className="text-xs font-bold text-amber-50">Custom Block Mode</span>
               <span
                 className={`text-[9px] font-metric uppercase px-1.5 py-0.5 rounded font-bold ${
                   customBlockModeEnabled
                     ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
-                    : 'bg-purple-950 text-purple-300 border border-purple-800/40'
+                    : 'bg-[#04160F] text-amber-300 border border-amber-500/30'
                 }`}
               >
                 {customBlockModeEnabled ? 'ACTIVE (ON)' : 'OFF'}
               </span>
             </div>
-            <p className="text-[11px] text-purple-200/70">
+            <p className="text-[11px] text-emerald-200/80">
               Targeted app, website & keyword triggers — tailored to your specific tests.
             </p>
           </div>
         </div>
-        <div className="flex items-center gap-1.5 text-purple-400 group-hover:text-white transition-colors">
+        <div className="flex items-center gap-1.5 text-amber-300 group-hover:text-white transition-colors">
           <span className="text-[10px] font-metric font-semibold hidden sm:inline">Configure</span>
           <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform" />
         </div>
       </div>
 
       {/* 6. ADD NEW BLOCK RULE FORM */}
-      <div className="rounded-3xl bg-[#160D27] border border-purple-900/30 p-5 space-y-4 shadow-lg">
+      <div className="rounded-3xl bg-[#082318] border border-amber-500/25 p-5 space-y-4 shadow-lg">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-2">
-            <Shield className="w-4 h-4 text-purple-400" />
-            <h2 className="text-sm font-bold text-white">Quick Block Rule</h2>
+            <Shield className="w-4 h-4 text-emerald-400" />
+            <h2 className="text-sm font-bold text-amber-50">Quick Block Rule</h2>
           </div>
-          <span className="text-[10px] font-metric text-purple-300/70 uppercase">
+          <span className="text-[10px] font-metric text-emerald-300/70 uppercase">
             Simulated in Web
           </span>
         </div>
 
         {/* 3-Way Tabs */}
-        <div className="grid grid-cols-3 gap-1 bg-[#10081E] p-1 rounded-xl border border-purple-900/40">
+        <div className="grid grid-cols-3 gap-1 bg-[#04160F] p-1 rounded-xl border border-amber-500/20">
           <button
             type="button"
             onClick={() => setActiveTab('app')}
-            className={`py-1.5 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors ${
+            className={`py-1.5 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
               activeTab === 'app'
-                ? 'bg-purple-600 text-white shadow-sm'
-                : 'text-purple-300/60 hover:text-purple-200'
+                ? 'bg-emerald-600 text-amber-50 shadow-sm'
+                : 'text-emerald-300/60 hover:text-amber-200'
             }`}
           >
             <Smartphone className="w-3 h-3" />
@@ -928,10 +960,10 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
           <button
             type="button"
             onClick={() => setActiveTab('website')}
-            className={`py-1.5 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors ${
+            className={`py-1.5 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
               activeTab === 'website'
-                ? 'bg-purple-600 text-white shadow-sm'
-                : 'text-purple-300/60 hover:text-purple-200'
+                ? 'bg-emerald-600 text-amber-50 shadow-sm'
+                : 'text-emerald-300/60 hover:text-amber-200'
             }`}
           >
             <Globe className="w-3 h-3" />
@@ -940,10 +972,10 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
           <button
             type="button"
             onClick={() => setActiveTab('keyword')}
-            className={`py-1.5 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors ${
+            className={`py-1.5 rounded-lg text-xs font-semibold flex items-center justify-center gap-1.5 transition-colors cursor-pointer ${
               activeTab === 'keyword'
-                ? 'bg-purple-600 text-white shadow-sm'
-                : 'text-purple-300/60 hover:text-purple-200'
+                ? 'bg-emerald-600 text-amber-50 shadow-sm'
+                : 'text-emerald-300/60 hover:text-amber-200'
             }`}
           >
             <Tag className="w-3 h-3" />
@@ -954,7 +986,7 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
         {/* Form Inputs */}
         <form onSubmit={handleCreateRule} className="space-y-3">
           <div>
-            <label className="block text-[10px] uppercase font-metric tracking-wider text-purple-300/70 mb-1">
+            <label className="block text-[10px] uppercase font-metric tracking-wider text-emerald-300/80 mb-1">
               Display Name
             </label>
             <input
@@ -968,12 +1000,12 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
                   ? 'e.g., Twitter / X Feed'
                   : 'e.g., NSFW & Triggers'
               }
-              className="w-full bg-[#10081E] border border-purple-900/40 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-purple-300/30 focus:outline-none focus:border-purple-500"
+              className="w-full bg-[#04160F] border border-amber-500/25 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-emerald-300/30 focus:outline-none focus:border-amber-400"
             />
           </div>
 
           <div>
-            <label className="block text-[10px] uppercase font-metric tracking-wider text-purple-300/70 mb-1">
+            <label className="block text-[10px] uppercase font-metric tracking-wider text-emerald-300/80 mb-1">
               {activeTab === 'app' ? 'Package Name / URL' : activeTab === 'website' ? 'Domain URL' : 'Trigger Words'}
             </label>
             <input
@@ -987,13 +1019,13 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
                   ? 'e.g., instagram.com'
                   : 'e.g., adult, provocative, binge'
               }
-              className="w-full bg-[#10081E] border border-purple-900/40 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-purple-300/30 focus:outline-none focus:border-purple-500"
+              className="w-full bg-[#04160F] border border-amber-500/25 rounded-xl px-3.5 py-2.5 text-xs text-white placeholder:text-emerald-300/30 focus:outline-none focus:border-amber-400"
             />
           </div>
 
           <button
             type="submit"
-            className="w-full py-2.5 px-4 rounded-xl bg-purple-600 hover:bg-purple-500 text-white font-semibold text-xs uppercase tracking-wider font-metric flex items-center justify-center gap-2 shadow-md transition-colors cursor-pointer"
+            className="w-full py-2.5 px-4 rounded-xl bg-gradient-to-r from-emerald-600 to-teal-600 hover:from-emerald-500 hover:to-teal-500 text-white font-semibold text-xs uppercase tracking-wider font-metric flex items-center justify-center gap-2 shadow-md transition-colors cursor-pointer"
           >
             <Shield className="w-4 h-4" />
             <span>Add to Shield Rules</span>
@@ -1004,10 +1036,10 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
       {/* 7. ACTIVE RULES LIST WITH SIMULATION TRIGGER */}
       <div className="space-y-3">
         <div className="flex items-center justify-between px-1">
-          <span className="text-xs font-bold text-white uppercase tracking-wider font-metric">
+          <span className="text-xs font-bold text-amber-50 uppercase tracking-wider font-metric">
             Active Guard Rules ({rules.length})
           </span>
-          <span className="text-[10px] text-purple-300/70 font-metric">
+          <span className="text-[10px] text-emerald-300/70 font-metric">
             Tap play icon to test interception
           </span>
         </div>
@@ -1016,14 +1048,14 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
           {rules.map((rule) => (
             <div
               key={rule.id}
-              className="p-3.5 rounded-2xl bg-[#160D27] border border-purple-900/30 flex items-center justify-between gap-2"
+              className="p-3.5 rounded-2xl bg-[#082318] border border-amber-500/20 flex items-center justify-between gap-2"
             >
               <div className="flex items-center gap-3 min-w-0">
-                <div className="w-8 h-8 rounded-xl bg-[#20133A] border border-purple-800/40 flex items-center justify-center shrink-0">
+                <div className="w-8 h-8 rounded-xl bg-[#04160F] border border-amber-500/30 flex items-center justify-center shrink-0">
                   {rule.type === 'app' ? (
-                    <Smartphone className="w-4 h-4 text-purple-400" />
+                    <Smartphone className="w-4 h-4 text-emerald-400" />
                   ) : rule.type === 'website' ? (
-                    <Globe className="w-4 h-4 text-purple-400" />
+                    <Globe className="w-4 h-4 text-emerald-400" />
                   ) : (
                     <Tag className="w-4 h-4 text-amber-400" />
                   )}
@@ -1031,14 +1063,14 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
 
                 <div className="min-w-0">
                   <div className="flex items-center gap-2">
-                    <span className="text-xs font-bold text-white truncate block">
+                    <span className="text-xs font-bold text-amber-50 truncate block">
                       {rule.label}
                     </span>
-                    <span className="text-[9px] uppercase font-metric px-1.5 py-0.2 bg-purple-950/80 text-purple-300 rounded border border-purple-800/40">
+                    <span className="text-[9px] uppercase font-metric px-1.5 py-0.2 bg-[#04160F] text-amber-300 rounded border border-amber-500/30">
                       {rule.type}
                     </span>
                   </div>
-                  <span className="text-[10px] text-purple-300/60 truncate block font-metric">
+                  <span className="text-[10px] text-emerald-300/70 truncate block font-metric">
                     {rule.target} • {rule.blocksCount} blocks
                   </span>
                 </div>
@@ -1050,17 +1082,17 @@ export const HomeDashboard: React.FC<HomeDashboardProps> = ({ onNavigate }) => {
                 <button
                   onClick={() => simulateBlockPrompt(rule)}
                   title="Simulate block trigger"
-                  className="w-7 h-7 rounded-lg bg-purple-900/30 hover:bg-purple-900/60 border border-purple-700/30 text-purple-300 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
+                  className="w-7 h-7 rounded-lg bg-[#061D14] hover:bg-[#0B3322] border border-amber-500/30 text-amber-300 hover:text-white flex items-center justify-center transition-colors cursor-pointer"
                   type="button"
                 >
-                  <Play className="w-3.5 h-3.5 fill-purple-300" />
+                  <Play className="w-3.5 h-3.5 fill-amber-300" />
                 </button>
 
                 {/* Toggle switch */}
                 <button
                   onClick={() => toggleRule(rule.id)}
                   className={`w-9 h-5 rounded-full p-0.5 transition-colors relative flex items-center cursor-pointer ${
-                    rule.enabled ? 'bg-purple-600' : 'bg-zinc-800'
+                    rule.enabled ? 'bg-emerald-600' : 'bg-zinc-800'
                   }`}
                   type="button"
                 >

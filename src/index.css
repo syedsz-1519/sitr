@@ -5,34 +5,49 @@
   --font-sans: 'Outfit', 'Inter', system-ui, sans-serif;
   --font-metric: 'Space Grotesk', system-ui, sans-serif;
 
-  --color-bg-base: #0B0714;
-  --color-bg-card: #170F26;
-  --color-bg-card-elevated: #1E1433;
-  --color-accent-primary: #7C3AED;
-  --color-accent-primary-light: #A78BFA;
-  --color-gold-armed: #D4A017;
+  --color-bg-base: #04140E;
+  --color-bg-card: #082318;
+  --color-bg-card-elevated: #0E3525;
+  --color-accent-primary: #10B981;
+  --color-accent-primary-light: #34D399;
+  --color-gold-armed: #D4AF37;
+  --color-gold-light: #F3DC87;
+  --color-gold-dark: #A67C1E;
   --color-danger-red: #DC2626;
-  --color-danger-bg: #2A0A0A;
-  --color-success-green: #22C55E;
+  --color-danger-bg: #280808;
+  --color-success-green: #10B981;
+
+  /* Classic Islamic Emerald Spectrum mapping */
+  --color-purple-950: #04160F;
+  --color-purple-900: #07261A;
+  --color-purple-800: #0C3827;
+  --color-purple-700: #124D36;
+  --color-purple-600: #1B6E4E;
+  --color-purple-500: #059669;
+  --color-purple-400: #10B981;
+  --color-purple-300: #6EE7B7;
+  --color-purple-200: #A7F3D0;
+  --color-purple-100: #D1FAE5;
+  --color-purple-50: #ECFDF5;
 }
 
 :root {
-  --bg-base: #0B0714;
-  --bg-card: #170F26;
-  --bg-card-elevated: #1E1433;
-  --accent-primary: #7C3AED;
-  --accent-primary-light: #A78BFA;
-  --gold-armed: #D4A017;
+  --bg-base: #04140E;
+  --bg-card: #082318;
+  --bg-card-elevated: #0E3525;
+  --accent-primary: #10B981;
+  --accent-primary-light: #34D399;
+  --gold-armed: #D4AF37;
   --danger-red: #DC2626;
-  --danger-bg: #2A0A0A;
-  --success-green: #22C55E;
-  --text-primary: #F5F3FF;
-  --text-muted: #A78BFA88;
+  --danger-bg: #280808;
+  --success-green: #10B981;
+  --text-primary: #F8F6EB;
+  --text-muted: #A3BDAC;
 }
 
 body {
-  background-color: #0B0714;
-  color: #F5F3FF;
+  background-color: #04140E;
+  color: #F8F6EB;
   font-family: 'Outfit', 'Inter', sans-serif;
   -webkit-tap-highlight-color: transparent;
   user-select: none;
@@ -46,20 +61,41 @@ body {
   font-family: 'Space Grotesk', sans-serif;
 }
 
-/* Custom scrollbar */
+/* Classic Islamic Geometric and Ornamental Arabesque Styling */
+.islamic-radiance-bg {
+  background-image: 
+    radial-gradient(circle at 50% -20%, rgba(212, 175, 55, 0.12) 0%, transparent 65%),
+    radial-gradient(circle at 85% 30%, rgba(16, 185, 129, 0.08) 0%, transparent 50%),
+    radial-gradient(circle at 15% 70%, rgba(16, 185, 129, 0.07) 0%, transparent 50%);
+}
+
+.islamic-arch-border {
+  border-color: rgba(212, 175, 55, 0.28);
+}
+
+.gold-glow {
+  box-shadow: 0 0 20px rgba(212, 175, 55, 0.25);
+}
+
+.emerald-glow {
+  box-shadow: 0 0 20px rgba(16, 185, 129, 0.25);
+}
+
+/* Custom scrollbar in emerald & antique gold */
 ::-webkit-scrollbar {
   width: 5px;
   height: 5px;
 }
 ::-webkit-scrollbar-track {
-  background: #0B0714;
+  background: #04140E;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2D1E4A;
+  background: #0C3827;
   border-radius: 9999px;
+  border: 1px solid rgba(212, 175, 55, 0.2);
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #7C3AED;
+  background: #D4AF37;
 }
 
 /* Keyframes for Taqwa Streak milestone & clean day pulse/glow */

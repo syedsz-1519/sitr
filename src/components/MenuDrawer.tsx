@@ -21,6 +21,7 @@ import {
   BookOpen,
   User,
   PenTool,
+  Wind,
 } from 'lucide-react';
 import { useSitrStore } from '../store/useSitrStore';
 import { ExtendedView } from '../types';
@@ -51,6 +52,7 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
     userProfile,
     setAuthModalOpen,
     getTodayReflection,
+    setBreathPauseModalOpen,
   } = useSitrStore();
 
   const todayReflection = getTodayReflection();
@@ -72,22 +74,22 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
       {/* Backdrop */}
       <div
         onClick={() => setMenuDrawerOpen(false)}
-        className="fixed inset-0 bg-[#0B0714]/80 backdrop-blur-md transition-opacity"
+        className="fixed inset-0 bg-[#04140E]/80 backdrop-blur-md transition-opacity"
       />
 
       {/* Drawer Panel */}
-      <aside className="relative z-10 w-[85%] max-w-[340px] bg-[#100C19] border-r border-purple-900/30 h-full flex flex-col justify-between shadow-2xl overflow-y-auto">
+      <aside className="relative z-10 w-[85%] max-w-[340px] bg-[#061D14] border-r border-amber-500/25 h-full flex flex-col justify-between shadow-2xl overflow-y-auto">
         <div className="p-5 space-y-6">
           {/* Header Brand */}
-          <div className="flex items-center justify-between pb-3 border-b border-purple-900/30">
+          <div className="flex items-center justify-between pb-3 border-b border-amber-500/20">
             <div className="flex items-center gap-3">
               <SitrLogo size="md" />
               <div>
                 <div className="flex items-baseline gap-1.5">
-                  <span className="font-extrabold text-lg tracking-wider text-white">SITR</span>
-                  <span className="font-arabic text-xl text-amber-400 leading-none select-none">سِتْر</span>
+                  <span className="font-extrabold text-lg tracking-wider text-amber-50">SITR</span>
+                  <span className="font-arabic text-2xl text-amber-400 leading-none select-none drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]">سِتْر</span>
                 </div>
-                <span className="text-[9px] uppercase tracking-[0.2em] text-purple-300/70 font-semibold font-metric">
+                <span className="text-[9px] uppercase tracking-[0.2em] text-emerald-300/80 font-semibold font-metric">
                   Guard Your Gaze
                 </span>
               </div>
@@ -95,45 +97,45 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
 
             <button
               onClick={() => setMenuDrawerOpen(false)}
-              className="w-8 h-8 rounded-full bg-[#1E1433] text-purple-300 hover:text-white flex items-center justify-center transition-colors"
+              className="w-8 h-8 rounded-full bg-[#0E3525] text-amber-300 hover:text-white flex items-center justify-center transition-colors border border-amber-500/30"
             >
               <X className="w-4 h-4" />
             </button>
           </div>
 
-          {/* Account Profile / Log In & Create Account Card (Featuring exact circular icon from user request) */}
+          {/* Account Profile / Log In & Create Account Card */}
           <div
             onClick={() => {
               setMenuDrawerOpen(false);
               setAuthModalOpen(true);
             }}
-            className="p-3 rounded-2xl bg-gradient-to-br from-[#20103A] to-[#140A26] border border-purple-600/40 hover:border-purple-400/70 flex items-center justify-between gap-3 cursor-pointer transition-all shadow-[0_4px_16px_rgba(124,58,237,0.2)] group"
+            className="p-3 rounded-2xl bg-gradient-to-br from-[#0D3827] to-[#04160F] border border-amber-500/35 hover:border-amber-400/70 flex items-center justify-between gap-3 cursor-pointer transition-all shadow-[0_4px_16px_rgba(212,175,55,0.15)] group"
           >
             <div className="flex items-center gap-3 min-w-0">
-              {/* Exact circular avatar icon from uploaded image */}
+              {/* Circular avatar icon */}
               <div className="relative shrink-0">
-                <div className="w-10 h-10 rounded-full bg-[#DDD6FE] text-[#241344] flex items-center justify-center shadow-[0_0_12px_rgba(221,214,254,0.35)] group-hover:scale-105 transition-transform">
-                  <User className="w-5 h-5 fill-[#241344] text-[#241344]" />
+                <div className="w-10 h-10 rounded-full bg-gradient-to-br from-amber-200 to-amber-400 text-[#04140E] flex items-center justify-center shadow-[0_0_12px_rgba(212,175,55,0.35)] group-hover:scale-105 transition-transform">
+                  <User className="w-5 h-5 fill-[#04140E] text-[#04140E]" />
                 </div>
                 {userProfile.isLoggedIn && (
-                  <span className="w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#100C19] absolute bottom-0 right-0"></span>
+                  <span className="w-3 h-3 rounded-full bg-emerald-400 border-2 border-[#061D14] absolute bottom-0 right-0"></span>
                 )}
               </div>
 
               <div className="min-w-0">
                 <div className="flex items-center gap-1.5">
-                  <span className="text-xs font-bold text-white truncate">
+                  <span className="text-xs font-bold text-amber-50 truncate">
                     {userProfile.isLoggedIn ? userProfile.name : 'Sign In / Create Account'}
                   </span>
                 </div>
-                <p className="text-[10px] text-purple-300/80 truncate">
+                <p className="text-[10px] text-emerald-200/80 truncate">
                   {userProfile.isLoggedIn ? 'Cloud Sync Active • Tap to manage' : 'Tap to log in & sync streak'}
                 </p>
               </div>
             </div>
 
             <div className="shrink-0">
-              <span className="text-[10px] font-metric font-semibold text-purple-200 px-2.5 py-1 rounded-full bg-[#35185D] border border-purple-500/40 group-hover:bg-purple-600 group-hover:text-white transition-colors">
+              <span className="text-[10px] font-metric font-semibold text-amber-300 px-2.5 py-1 rounded-full bg-[#082318] border border-amber-500/40 group-hover:bg-amber-500 group-hover:text-black transition-colors">
                 {userProfile.isLoggedIn ? 'Account' : 'Log In'}
               </span>
             </div>
@@ -141,7 +143,7 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
 
           {/* Section: CORE */}
           <div className="space-y-1">
-            <span className="text-[10px] uppercase font-metric tracking-widest text-purple-300/60 font-semibold px-2">
+            <span className="text-[10px] uppercase font-metric tracking-widest text-amber-400/80 font-semibold px-2">
               Core
             </span>
 
@@ -149,8 +151,8 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
               onClick={() => navigateTo('dashboard')}
               className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-full transition-all text-sm font-medium ${
                 currentView === 'dashboard'
-                  ? 'bg-purple-600 text-white shadow-[0_4px_16px_rgba(124,58,237,0.4)]'
-                  : 'text-purple-200/80 hover:bg-[#1E1433] hover:text-white'
+                  ? 'bg-emerald-600 text-amber-50 shadow-[0_4px_16px_rgba(16,185,129,0.35)] font-semibold'
+                  : 'text-emerald-200/80 hover:bg-[#0A2D1F] hover:text-amber-100'
               }`}
             >
               <LayoutDashboard className="w-4 h-4" />
@@ -161,18 +163,18 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
               onClick={() => navigateTo('custom_block_mode')}
               className={`w-full flex items-center justify-between px-4 py-2.5 rounded-full transition-all text-sm font-medium ${
                 currentView === 'custom_block_mode'
-                  ? 'bg-purple-600 text-white shadow-[0_4px_16px_rgba(124,58,237,0.4)]'
-                  : 'text-purple-200/80 hover:bg-[#1E1433] hover:text-white'
+                  ? 'bg-emerald-600 text-amber-50 shadow-[0_4px_16px_rgba(16,185,129,0.35)] font-semibold'
+                  : 'text-emerald-200/80 hover:bg-[#0A2D1F] hover:text-amber-100'
               }`}
             >
               <div className="flex items-center gap-3">
-                <Shield className="w-4 h-4 text-purple-400" />
+                <Shield className="w-4 h-4 text-emerald-400" />
                 <span>Custom Block Mode</span>
               </div>
               <span className={`text-[10px] px-2 py-0.5 rounded-full font-metric ${
                 customBlockModeEnabled
                   ? 'bg-emerald-500/20 text-emerald-300 border border-emerald-500/40'
-                  : 'bg-purple-950/60 border border-purple-800/40 text-purple-300'
+                  : 'bg-[#04160F] border border-amber-500/20 text-emerald-300'
               }`}>
                 {customBlockModeEnabled ? 'ACTIVE' : `${customRules.length} rules`}
               </span>
@@ -182,15 +184,15 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
               onClick={() => navigateTo('sessions_log')}
               className={`w-full flex items-center justify-between px-4 py-2.5 rounded-full transition-all text-sm font-medium ${
                 currentView === 'sessions_log'
-                  ? 'bg-purple-600 text-white shadow-[0_4px_16px_rgba(124,58,237,0.4)]'
-                  : 'text-purple-200/80 hover:bg-[#1E1433] hover:text-white'
+                  ? 'bg-emerald-600 text-amber-50 shadow-[0_4px_16px_rgba(16,185,129,0.35)] font-semibold'
+                  : 'text-emerald-200/80 hover:bg-[#0A2D1F] hover:text-amber-100'
               }`}
             >
               <div className="flex items-center gap-3">
-                <Shield className="w-4 h-4 text-purple-400" />
+                <Shield className="w-4 h-4 text-emerald-400" />
                 <span>Blocked Apps</span>
               </div>
-              <span className="text-[10px] bg-purple-950/60 border border-purple-800/40 text-purple-300 px-2 py-0.5 rounded-full font-metric">
+              <span className="text-[10px] bg-[#04160F] border border-amber-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-metric">
                 {rules.length} active
               </span>
             </button>
@@ -198,14 +200,14 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
 
           {/* Section: NAFS TOOLS */}
           <div className="space-y-1.5">
-            <span className="text-[10px] uppercase font-metric tracking-widest text-purple-300/60 font-semibold px-2">
+            <span className="text-[10px] uppercase font-metric tracking-widest text-amber-400/80 font-semibold px-2">
               Nafs Tools
             </span>
 
             {/* Emergency Action */}
             <button
               onClick={handleStruggling}
-              className="w-full flex items-center gap-3 px-4 py-3 rounded-full bg-rose-950/40 border border-rose-600/40 text-rose-300 hover:bg-rose-900/30 transition-all text-sm font-semibold shadow-[0_0_15px_rgba(225,29,72,0.15)] active:scale-98"
+              className="w-full flex items-center gap-3 px-4 py-3 rounded-full bg-rose-950/40 border border-rose-500/40 text-rose-200 hover:bg-rose-900/40 transition-all text-sm font-semibold shadow-[0_0_15px_rgba(225,29,72,0.15)] active:scale-98"
             >
               <Heart className="w-4 h-4 text-rose-400 fill-rose-500/40" />
               <span>I'm Struggling — Bhai, Help Karo</span>
@@ -215,8 +217,8 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
               onClick={() => navigateTo('dhikr_settings')}
               className={`w-full flex items-center justify-between px-4 py-2.5 rounded-full transition-all text-sm font-medium ${
                 currentView === 'dhikr_settings'
-                  ? 'bg-purple-600 text-white shadow-[0_4px_16px_rgba(124,58,237,0.4)]'
-                  : 'text-purple-200/80 hover:bg-[#1E1433] hover:text-white'
+                  ? 'bg-emerald-600 text-amber-50 shadow-[0_4px_16px_rgba(16,185,129,0.35)] font-semibold'
+                  : 'text-emerald-200/80 hover:bg-[#0A2D1F] hover:text-amber-100'
               }`}
             >
               <div className="flex items-center gap-3">
@@ -229,11 +231,27 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
             </button>
 
             <button
+              onClick={() => {
+                setMenuDrawerOpen(false);
+                setBreathPauseModalOpen(true);
+              }}
+              className="w-full flex items-center justify-between px-4 py-2.5 rounded-full transition-all text-sm font-medium text-amber-200 hover:bg-[#0A2D1F] hover:text-amber-100 bg-[#041E14] border border-amber-500/25 cursor-pointer"
+            >
+              <div className="flex items-center gap-3">
+                <Wind className="w-4 h-4 text-amber-400" />
+                <span>30s Breath Pause</span>
+              </div>
+              <span className="text-[10px] bg-amber-500/20 text-amber-300 font-bold px-2 py-0.5 rounded-full font-metric">
+                30s
+              </span>
+            </button>
+
+            <button
               onClick={() => navigateTo('daily_reflection')}
               className={`w-full flex items-center justify-between px-4 py-2.5 rounded-full transition-all text-sm font-medium ${
                 currentView === 'daily_reflection'
-                  ? 'bg-purple-600 text-white shadow-[0_4px_16px_rgba(124,58,237,0.4)]'
-                  : 'text-purple-200/80 hover:bg-[#1E1433] hover:text-white'
+                  ? 'bg-emerald-600 text-amber-50 shadow-[0_4px_16px_rgba(16,185,129,0.35)] font-semibold'
+                  : 'text-emerald-200/80 hover:bg-[#0A2D1F] hover:text-amber-100'
               }`}
             >
               <div className="flex items-center gap-3">
@@ -255,29 +273,29 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
               onClick={() => navigateTo('ayah_reflections')}
               className={`w-full flex items-center justify-between px-4 py-2.5 rounded-full transition-all text-sm font-medium ${
                 currentView === 'ayah_reflections'
-                  ? 'bg-purple-600 text-white shadow-[0_4px_16px_rgba(124,58,237,0.4)]'
-                  : 'text-purple-200/80 hover:bg-[#1E1433] hover:text-white'
+                  ? 'bg-emerald-600 text-amber-50 shadow-[0_4px_16px_rgba(16,185,129,0.35)] font-semibold'
+                  : 'text-emerald-200/80 hover:bg-[#0A2D1F] hover:text-amber-100'
               }`}
             >
               <div className="flex items-center gap-3">
-                <BookOpen className="w-4 h-4 text-purple-400" />
+                <BookOpen className="w-4 h-4 text-emerald-400" />
                 <span>Quranic Reflections</span>
               </div>
-              <span className="text-[10px] bg-purple-950/60 border border-purple-800/40 text-purple-300 px-2 py-0.5 rounded-full font-metric">
+              <span className="text-[10px] bg-[#04160F] border border-amber-500/20 text-emerald-300 px-2 py-0.5 rounded-full font-metric">
                 40 Verses
               </span>
             </button>
 
-            <div className="w-full flex items-center justify-between px-4 py-2.5 rounded-full text-sm text-purple-200/80">
+            <div className="w-full flex items-center justify-between px-4 py-2.5 rounded-full text-sm text-emerald-200/80">
               <div className="flex items-center gap-3">
-                <Moon className="w-4 h-4 text-indigo-400" />
+                <Moon className="w-4 h-4 text-amber-400" />
                 <span>Night Guard (11pm–5am)</span>
               </div>
               <button
                 onClick={toggleNightGuard}
                 className={`text-[10px] px-2.5 py-0.5 rounded-full font-metric font-bold transition-colors ${
                   nightGuard
-                    ? 'bg-purple-600/40 border border-purple-500/50 text-purple-200'
+                    ? 'bg-emerald-500/30 border border-emerald-400/50 text-amber-200'
                     : 'bg-zinc-800 text-zinc-500'
                 }`}
               >
@@ -288,7 +306,7 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
 
           {/* Section: INSIGHTS */}
           <div className="space-y-1">
-            <span className="text-[10px] uppercase font-metric tracking-widest text-purple-300/60 font-semibold px-2">
+            <span className="text-[10px] uppercase font-metric tracking-widest text-amber-400/80 font-semibold px-2">
               Insights
             </span>
 
@@ -296,23 +314,23 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
               onClick={() => navigateTo('nafs_score')}
               className={`w-full flex items-center justify-between px-4 py-2.5 rounded-full transition-all text-sm font-medium ${
                 currentView === 'nafs_score'
-                  ? 'bg-purple-600 text-white shadow-[0_4px_16px_rgba(124,58,237,0.4)]'
-                  : 'text-purple-200/80 hover:bg-[#1E1433] hover:text-white'
+                  ? 'bg-emerald-600 text-amber-50 shadow-[0_4px_16px_rgba(16,185,129,0.35)] font-semibold'
+                  : 'text-emerald-200/80 hover:bg-[#0A2D1F] hover:text-amber-100'
               }`}
             >
               <div className="flex items-center gap-3">
-                <Brain className="w-4 h-4 text-purple-400" />
+                <Brain className="w-4 h-4 text-emerald-400" />
                 <span>Nafs Score</span>
               </div>
-              <span className="text-xs text-purple-300 font-bold font-metric">46/100</span>
+              <span className="text-xs text-amber-300 font-bold font-metric">46/100</span>
             </button>
 
             <button
               onClick={() => navigateTo('taqwa_streak')}
               className={`w-full flex items-center justify-between px-4 py-2.5 rounded-full transition-all text-sm font-medium ${
                 currentView === 'taqwa_streak'
-                  ? 'bg-purple-600 text-white shadow-[0_4px_16px_rgba(124,58,237,0.4)]'
-                  : 'text-purple-200/80 hover:bg-[#1E1433] hover:text-white'
+                  ? 'bg-emerald-600 text-amber-50 shadow-[0_4px_16px_rgba(16,185,129,0.35)] font-semibold'
+                  : 'text-emerald-200/80 hover:bg-[#0A2D1F] hover:text-amber-100'
               }`}
             >
               <div className="flex items-center gap-3">
@@ -326,8 +344,8 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
               onClick={() => navigateTo('temptation_map')}
               className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-full transition-all text-sm font-medium ${
                 currentView === 'temptation_map'
-                  ? 'bg-purple-600 text-white shadow-[0_4px_16px_rgba(124,58,237,0.4)]'
-                  : 'text-purple-200/80 hover:bg-[#1E1433] hover:text-white'
+                  ? 'bg-emerald-600 text-amber-50 shadow-[0_4px_16px_rgba(16,185,129,0.35)] font-semibold'
+                  : 'text-emerald-200/80 hover:bg-[#0A2D1F] hover:text-amber-100'
               }`}
             >
               <Zap className="w-4 h-4 text-amber-400" />
@@ -338,18 +356,18 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
               onClick={() => navigateTo('weekly_report')}
               className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-full transition-all text-sm font-medium ${
                 currentView === 'weekly_report'
-                  ? 'bg-purple-600 text-white shadow-[0_4px_16px_rgba(124,58,237,0.4)]'
-                  : 'text-purple-200/80 hover:bg-[#1E1433] hover:text-white'
+                  ? 'bg-emerald-600 text-amber-50 shadow-[0_4px_16px_rgba(16,185,129,0.35)] font-semibold'
+                  : 'text-emerald-200/80 hover:bg-[#0A2D1F] hover:text-amber-100'
               }`}
             >
-              <BarChart3 className="w-4 h-4 text-purple-400" />
+              <BarChart3 className="w-4 h-4 text-emerald-400" />
               <span>Weekly Report</span>
             </button>
           </div>
 
           {/* Section: GROWTH */}
           <div className="space-y-1">
-            <span className="text-[10px] uppercase font-metric tracking-widest text-purple-300/60 font-semibold px-2">
+            <span className="text-[10px] uppercase font-metric tracking-widest text-amber-400/80 font-semibold px-2">
               Growth
             </span>
 
@@ -357,11 +375,11 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
               onClick={() => navigateTo('accountability')}
               className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-full transition-all text-sm font-medium ${
                 currentView === 'accountability'
-                  ? 'bg-purple-600 text-white shadow-[0_4px_16px_rgba(124,58,237,0.4)]'
-                  : 'text-purple-200/80 hover:bg-[#1E1433] hover:text-white'
+                  ? 'bg-emerald-600 text-amber-50 shadow-[0_4px_16px_rgba(16,185,129,0.35)] font-semibold'
+                  : 'text-emerald-200/80 hover:bg-[#0A2D1F] hover:text-amber-100'
               }`}
             >
-              <Users className="w-4 h-4 text-purple-400" />
+              <Users className="w-4 h-4 text-emerald-400" />
               <span>Accountability</span>
             </button>
 
@@ -369,20 +387,20 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
               onClick={() => navigateTo('smart_alerts')}
               className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-full transition-all text-sm font-medium ${
                 currentView === 'smart_alerts'
-                  ? 'bg-purple-600 text-white shadow-[0_4px_16px_rgba(124,58,237,0.4)]'
-                  : 'text-purple-200/80 hover:bg-[#1E1433] hover:text-white'
+                  ? 'bg-emerald-600 text-amber-50 shadow-[0_4px_16px_rgba(16,185,129,0.35)] font-semibold'
+                  : 'text-emerald-200/80 hover:bg-[#0A2D1F] hover:text-amber-100'
               }`}
             >
-              <Bell className="w-4 h-4 text-purple-400" />
-              <span>Smart Alerts</span>
+              <Bell className="w-4 h-4 text-amber-400" />
+              <span>Smart Alerts & Scheduler</span>
             </button>
 
             <button
               onClick={() => navigateTo('challenges')}
               className={`w-full flex items-center gap-3 px-4 py-2.5 rounded-full transition-all text-sm font-medium ${
                 currentView === 'challenges'
-                  ? 'bg-purple-600 text-white shadow-[0_4px_16px_rgba(124,58,237,0.4)]'
-                  : 'text-purple-200/80 hover:bg-[#1E1433] hover:text-white'
+                  ? 'bg-emerald-600 text-amber-50 shadow-[0_4px_16px_rgba(16,185,129,0.35)] font-semibold'
+                  : 'text-emerald-200/80 hover:bg-[#0A2D1F] hover:text-amber-100'
               }`}
             >
               <Trophy className="w-4 h-4 text-amber-400" />
@@ -391,14 +409,14 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
           </div>
 
           {/* Salah Lock Toggle Card */}
-          <div className="p-3.5 rounded-2xl bg-[#170F26] border border-purple-900/30 flex items-center justify-between">
+          <div className="p-3.5 rounded-2xl bg-[#082318] border border-amber-500/20 flex items-center justify-between">
             <div className="flex items-center gap-3">
-              <div className="w-8 h-8 rounded-full bg-purple-950/60 border border-purple-800/40 flex items-center justify-center text-purple-300">
-                <Moon className="w-4 h-4 text-purple-400" />
+              <div className="w-8 h-8 rounded-full bg-[#04160F] border border-amber-500/30 flex items-center justify-center text-amber-300">
+                <Moon className="w-4 h-4 text-amber-400" />
               </div>
               <div>
-                <span className="text-sm font-semibold text-white block leading-tight">Salah Lock</span>
-                <span className="text-xs text-purple-300/80 flex items-center gap-1 font-arabic">
+                <span className="text-sm font-semibold text-amber-50 block leading-tight">Salah Lock</span>
+                <span className="text-xs text-amber-300/90 flex items-center gap-1 font-arabic">
                   {salahLock ? 'Active — مَاشَاءَ اللّٰه' : 'Inactive'}
                 </span>
               </div>
@@ -407,7 +425,7 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
             <button
               onClick={toggleSalahLock}
               className={`w-12 h-6 rounded-full p-1 transition-colors relative flex items-center ${
-                salahLock ? 'bg-purple-600' : 'bg-zinc-800'
+                salahLock ? 'bg-emerald-600' : 'bg-zinc-800'
               }`}
               type="button"
             >
@@ -420,11 +438,11 @@ export const MenuDrawer: React.FC<MenuDrawerProps> = ({
           </div>
 
           {/* Founder Status Card */}
-          <div className="p-4 rounded-2xl bg-[#170F26] border border-purple-900/40 flex flex-col items-center text-center">
-            <span className="text-[10px] font-metric uppercase tracking-widest text-purple-300/70 mb-0.5">
+          <div className="p-4 rounded-2xl bg-[#082318] border border-amber-500/25 flex flex-col items-center text-center shadow-md">
+            <span className="text-[10px] font-metric uppercase tracking-widest text-amber-400/80 mb-0.5">
               Founder Status
             </span>
-            <span className="text-sm font-bold text-white">{userName}</span>
+            <span className="text-sm font-bold text-amber-50">{userName}</span>
             <div className="mt-1.5 flex items-center gap-1.5 px-3 py-0.5 rounded-full bg-amber-500/15 border border-amber-500/30 text-amber-300 text-xs font-semibold">
               <Sparkles className="w-3 h-3 text-amber-400" />
               <span>Lifetime Shield</span>

@@ -31,15 +31,15 @@ export const SitrLogo: React.FC<SitrLogoProps> = ({
     <div className={`flex items-center gap-2.5 ${className}`}>
       {/* Royal Squircle Shield Icon with Crescent Moon */}
       <div className="relative flex items-center justify-center shrink-0">
-        {/* Ambient neon purple back-glow */}
-        <div className="absolute -inset-1 bg-gradient-to-tr from-purple-600/40 via-purple-400/30 to-amber-500/20 rounded-2xl blur-md"></div>
+        {/* Ambient warm gold and emerald back-glow */}
+        <div className="absolute -inset-1 bg-gradient-to-tr from-emerald-600/30 via-amber-500/30 to-emerald-400/20 rounded-2xl blur-md"></div>
 
         {/* Shield Container */}
         <div
-          className={`${sizeMap[size]} relative rounded-xl sm:rounded-2xl bg-gradient-to-br from-[#20103A] via-[#140A26] to-[#0A0414] border border-purple-400/40 flex items-center justify-center shadow-[0_0_16px_rgba(168,85,247,0.35)] overflow-hidden`}
+          className={`${sizeMap[size]} relative rounded-xl sm:rounded-2xl bg-gradient-to-br from-[#0D3827] via-[#082318] to-[#04140E] border border-amber-400/50 flex items-center justify-center shadow-[0_0_16px_rgba(212,175,55,0.3)] overflow-hidden`}
         >
           {/* Subtle inner shield highlight overlay */}
-          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-purple-500/20 via-transparent to-transparent pointer-events-none"></div>
+          <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top,_var(--tw-gradient-stops))] from-amber-400/20 via-emerald-500/10 to-transparent pointer-events-none"></div>
 
           {/* Precision SVG Emblem: Sculpted Shield with Islamic Crescent & Morning Star */}
           <svg
@@ -48,25 +48,26 @@ export const SitrLogo: React.FC<SitrLogoProps> = ({
             viewBox="0 0 40 40"
             fill="none"
             xmlns="http://www.w3.org/2000/svg"
-            className="relative drop-shadow-[0_2px_8px_rgba(168,85,247,0.5)]"
+            className="relative drop-shadow-[0_2px_8px_rgba(212,175,55,0.4)]"
           >
             <defs>
               <linearGradient id="shieldBorder" x1="5" y1="4" x2="35" y2="36" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stopColor="#DDD6FE" />
-                <stop offset="45%" stopColor="#A855F7" />
-                <stop offset="85%" stopColor="#7C3AED" />
-                <stop offset="100%" stopColor="#F59E0B" />
+                <stop offset="0%" stopColor="#FFF8DB" />
+                <stop offset="35%" stopColor="#F3DC87" />
+                <stop offset="70%" stopColor="#D4AF37" />
+                <stop offset="100%" stopColor="#10B981" />
               </linearGradient>
 
               <linearGradient id="crescentGrad" x1="12" y1="10" x2="28" y2="28" gradientUnits="userSpaceOnUse">
                 <stop offset="0%" stopColor="#FFFFFF" />
-                <stop offset="30%" stopColor="#E9D5FF" />
-                <stop offset="70%" stopColor="#C084FC" />
-                <stop offset="100%" stopColor="#A855F7" />
+                <stop offset="40%" stopColor="#FFF4D0" />
+                <stop offset="80%" stopColor="#F5D061" />
+                <stop offset="100%" stopColor="#D4AF37" />
               </linearGradient>
 
               <linearGradient id="goldStar" x1="22" y1="12" x2="26" y2="16" gradientUnits="userSpaceOnUse">
-                <stop offset="0%" stopColor="#FDE68A" />
+                <stop offset="0%" stopColor="#FFFFFF" />
+                <stop offset="50%" stopColor="#FDE68A" />
                 <stop offset="100%" stopColor="#F59E0B" />
               </linearGradient>
             </defs>
@@ -74,7 +75,7 @@ export const SitrLogo: React.FC<SitrLogoProps> = ({
             {/* Sculpted Outer Shield Silhouette */}
             <path
               d="M20 5C24.5 7.8 30 8.2 33 8.8C33 19.5 28.5 28.5 20 34C11.5 28.5 7 19.5 7 8.8C10 8.2 15.5 7.8 20 5Z"
-              fill="#180B2C"
+              fill="#061F15"
               stroke="url(#shieldBorder)"
               strokeWidth="2"
               strokeLinejoin="round"
@@ -84,8 +85,8 @@ export const SitrLogo: React.FC<SitrLogoProps> = ({
             <path
               d="M20 8C23.5 10.2 27.5 10.6 30 11.1C30 19.2 26.5 26.2 20 30.5C13.5 26.2 10 19.2 10 11.1C12.5 10.6 16.5 10.2 20 8Z"
               fill="none"
-              stroke="#9333EA"
-              strokeOpacity="0.45"
+              stroke="#D4AF37"
+              strokeOpacity="0.4"
               strokeWidth="1"
             />
 
@@ -93,7 +94,7 @@ export const SitrLogo: React.FC<SitrLogoProps> = ({
             <path
               d="M22.5 12.5C16.8 12.8 13.5 17 14 22.2C14.5 26.8 18.5 29.5 22.8 28.8C20 27.8 18.2 25.5 18 22.5C17.8 18.8 20.2 15 22.5 12.5Z"
               fill="url(#crescentGrad)"
-              filter="drop-shadow(0 0 3px rgba(192, 132, 252, 0.8))"
+              filter="drop-shadow(0 0 3px rgba(212, 175, 55, 0.7))"
             />
 
             {/* Glowing Taqwa Star / Dawn Spark */}
@@ -105,12 +106,12 @@ export const SitrLogo: React.FC<SitrLogoProps> = ({
       {showText && (
         <div className="flex flex-col">
           <div className="flex items-center gap-1.5 leading-none">
-            <span className="font-extrabold text-lg tracking-wider text-white">SITR</span>
-            <span className="font-arabic text-xl text-amber-400 font-bold leading-none select-none">
+            <span className="font-extrabold text-lg tracking-wider text-amber-50">SITR</span>
+            <span className="font-arabic text-2xl text-amber-400 font-bold leading-none select-none drop-shadow-[0_0_8px_rgba(212,175,55,0.4)]">
               سِتْر
             </span>
           </div>
-          <span className="text-[9px] uppercase tracking-[0.2em] text-purple-300/70 font-semibold font-metric mt-0.5">
+          <span className="text-[9px] uppercase tracking-[0.2em] text-emerald-300/80 font-semibold font-metric mt-0.5">
             Guard Your Gaze
           </span>
         </div>

@@ -166,3 +166,11 @@ export interface DailyReflectionEntry {
   gratitudeNote?: string;
   cleanDayLogged: boolean;
 }
+
+export interface DailyGratitudeEntry {
+  id: string;
+  date: string; // YYYY-MM-DD
+  timestamp: string; // ISO string
+  items: [string, string, string]; // Three things grateful for today
+  categoryNote?: string;
+}
