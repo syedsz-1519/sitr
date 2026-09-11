@@ -23,6 +23,7 @@ import { useSitrStore } from '../store/useSitrStore';
 import { REFLECTION_PROMPTS, getDailyPrompt } from '../data/dailyReflections';
 import { SpiritualState, ReflectionPrompt, DailyReflectionEntry, DailyGratitudeEntry } from '../types';
 import { dhikrAmbientAudio } from '../utils/ambientAudioEngine';
+import { MuhasabahJournal } from '../components/MuhasabahJournal';
 
 const GRATITUDE_STORAGE_KEY = 'sitr_daily_gratitude_entries';
 
@@ -97,6 +98,7 @@ export const DailyReflectionView: React.FC = () => {
 
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [activePrompt, setActivePrompt] = useState<ReflectionPrompt>(todayPrompt);
+  const [activeSection, setActiveSection] = useState<'muhasabah' | 'gratitude' | 'prompts'>('muhasabah');
 
   // Daily Gratitude state
   const [gratitudeEntries, setGratitudeEntries] = useState<DailyGratitudeEntry[]>(loadInitialGratitudeEntries);
@@ -282,7 +284,56 @@ export const DailyReflectionView: React.FC = () => {
         </div>
       </div>
 
-      {/* 2. DAILY GRATITUDE SECTION (Shukr) */}
+      {/* Primary Section Switcher */}
+      <div className="grid grid-cols-3 p-1.5 rounded-2xl bg-[#04160E] border border-amber-500/30 text-xs font-metric font-bold shadow-lg">
+        <button
+          type="button"
+          id="btn-section-muhasabah"
+          onClick={() => setActiveSection('muhasabah')}
+          className={`py-3 px-2 rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+            activeSection === 'muhasabah'
+              ? 'bg-gradient-to-r from-amber-500/30 via-emerald-600/35 to-teal-600/35 text-amber-200 border border-amber-400/50 shadow-sm'
+              : 'text-emerald-200/60 hover:text-white'
+          }`}
+        >
+          <Moon className="w-4 h-4 text-amber-400" />
+          <span className="truncate">Muhasabah & Trends</span>
+        </button>
+
+        <button
+          type="button"
+          id="btn-section-gratitude"
+          onClick={() => setActiveSection('gratitude')}
+          className={`py-3 px-2 rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+            activeSection === 'gratitude'
+              ? 'bg-gradient-to-r from-amber-500/30 via-emerald-600/35 to-teal-600/35 text-amber-200 border border-amber-400/50 shadow-sm'
+              : 'text-emerald-200/60 hover:text-white'
+          }`}
+        >
+          <Heart className="w-4 h-4 text-rose-400" />
+          <span className="truncate">Daily Shukr ({gratitudeEntries.length})</span>
+        </button>
+
+        <button
+          type="button"
+          id="btn-section-prompts"
+          onClick={() => setActiveSection('prompts')}
+          className={`py-3 px-2 rounded-xl flex items-center justify-center gap-1.5 transition-all cursor-pointer ${
+            activeSection === 'prompts'
+              ? 'bg-gradient-to-r from-amber-500/30 via-emerald-600/35 to-teal-600/35 text-amber-200 border border-amber-400/50 shadow-sm'
+              : 'text-emerald-200/60 hover:text-white'
+          }`}
+        >
+          <BookOpen className="w-4 h-4 text-emerald-400" />
+          <span className="truncate">Islamic Prompts</span>
+        </button>
+      </div>
+
+      {/* SECTION 1: MUHASABAH JOURNAL (Spiritual Audit & Emotional Trends) */}
+      {activeSection === 'muhasabah' && <MuhasabahJournal />}
+
+      {/* SECTION 2: DAILY GRATITUDE SECTION (Shukr) */}
+      {activeSection === 'gratitude' && (
       <div className="rounded-3xl bg-gradient-to-br from-[#08261A] via-[#061D14] to-[#04140E] border border-amber-500/40 p-5 sm:p-6 shadow-xl relative overflow-hidden space-y-5">
         <div className="absolute top-0 right-0 w-48 h-48 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
 
@@ -505,9 +556,13 @@ export const DailyReflectionView: React.FC = () => {
           )}
         </div>
       </div>
+      )}
 
-      {/* 3. Tonight's Featured Muhasabah Card */}
-      <div className="rounded-3xl bg-[#061D14] border border-amber-500/35 p-5 shadow-lg relative">
+      {/* SECTION 3: ISLAMIC PROMPTS & TIMELINE */}
+      {activeSection === 'prompts' && (
+        <div className="space-y-6">
+          {/* 3. Tonight's Featured Muhasabah Card */}
+          <div className="rounded-3xl bg-[#061D14] border border-amber-500/35 p-5 shadow-lg relative">
         <div className="flex items-center justify-between mb-3">
           <div className="flex items-center gap-2">
             <Sparkles className="w-4 h-4 text-amber-400" />
@@ -735,6 +790,8 @@ export const DailyReflectionView: React.FC = () => {
           </div>
         )}
       </div>
+      </div>
+      )}
     </div>
   );
 };

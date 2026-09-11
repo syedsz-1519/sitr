@@ -140,6 +140,21 @@ export interface TaqwaReminderItem {
 
 export type SpiritualState = 'peaceful' | 'guarded' | 'tested' | 'repentant' | 'striving';
 
+export type EmotionalMood =
+  | 'sakinah' // Peaceful & Serene (Heart at tranquil rest)
+  | 'mahfuz' // Guarded & Vigilant (Protected boundaries)
+  | 'mujahid' // Striving & Resilient (Fought nafs with perseverance)
+  | 'mubtala' // Tested & Vulnerable (Heavy craving / high tension)
+  | 'taib'; // Repentant & Returning (Humbled in sincere Istighfar)
+
+export interface MuhasabahAuditChecklist {
+  gazeGuarded: boolean; // Lowered gaze & avoided trigger reels/images
+  salahKhushu: boolean; // Prayed 5 daily prayers on time with heart presence
+  dhikrTongue: boolean; // Kept tongue moist with daily Dhikr & Istighfar
+  urgeConfronted: boolean; // Paused & resisted dopamine cravings with sabr
+  digitalDiscipline: boolean; // Disengaged from screens on time / no late-night browsing
+}
+
 export interface ReflectionPrompt {
   id: string;
   quote: {
@@ -165,6 +180,13 @@ export interface DailyReflectionEntry {
   spiritualState: SpiritualState;
   gratitudeNote?: string;
   cleanDayLogged: boolean;
+  // Muhasabah Spiritual Audit & Emotional Trend data
+  auditChecklist?: MuhasabahAuditChecklist;
+  auditScore?: number; // 0 to 5
+  emotionalMood?: EmotionalMood;
+  calmnessLevel?: number; // 1 to 5 (1 = Anxious/Restless, 5 = Deep Sakinah)
+  primaryTrigger?: string; // Optional context tag (e.g., 'Late Night', 'Boredom', 'Work Stress')
+  lessonLearned?: string; // Core spiritual wisdom from today's trial
 }
 
 export interface DailyGratitudeEntry {
